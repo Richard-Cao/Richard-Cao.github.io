@@ -68,9 +68,8 @@ pagination_dir: page
 theme: next
 stylus:
   compress: true
-plugins:
-- hexo-generator-feed
 
+# Local Search
 search:
   path: search.xml
   field: post
