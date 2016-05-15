@@ -3,7 +3,7 @@ date: 2016-03-30 10:31:42
 categories: hybrid
 tags: react-native
 ---
-转载请注明出处http://richard-cao.github.io/
+转载请注明出处：http://richardcao.me/
 
 昨晚有幸和返利网技术团队做了React-Native相关的技术交流与分享，今天把Keynote毫无保留的分享给大家，不多说，直接上干货！
 

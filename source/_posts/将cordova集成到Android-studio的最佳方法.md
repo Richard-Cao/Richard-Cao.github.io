@@ -3,7 +3,7 @@ date: 2015-11-22 00:21:52
 categories: hybrid
 tags: cordova
 ---
-转载请注明出处http://richard-cao.github.io/
+转载请注明出处：http://richardcao.me/
 
 >网上有很多集成cordova到Android studio中进行Android开发的方法，这里我给大家介绍一种比较简单的方法，亲测有效。
 

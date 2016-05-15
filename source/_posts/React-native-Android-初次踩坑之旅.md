@@ -3,7 +3,7 @@ date: 2015-11-24 21:37:27
 categories: hybrid
 tags: react-native
 ---
-转载请注明出处http://richard-cao.github.io/
+转载请注明出处：http://richardcao.me/
 
 > 本文背景：项目要上线一个app内部通知中心的功能模块，UI比较简单，ListView为主。之前关注react-native一段时间，所以打算使用react-native踩坑，激进的来一把。
 
@@ -64,7 +64,7 @@ public class ReactInstanceManager {
                     .setUseDeveloperSupport(BuildConfig.DEBUG)
                     .setInitialLifecycleState(LifecycleState.RESUMED)
                     .build();
-    }   
+    }
 
     private ReactInstanceManager() {
 
