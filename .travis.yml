@@ -9,6 +9,9 @@ branches:
   only:
   - hexo
 
+git:
+  submodules: false
+
 before_install:
 - openssl aes-256-cbc -K $encrypted_a4dcfa5f2d9a_key -iv $encrypted_a4dcfa5f2d9a_iv
   -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
@@ -19,14 +22,14 @@ before_install:
 - git config --global user.name 'Richard-Cao'
 - git config --global user.email '403164405@qq.com'
 - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
-- git submodule update --init --recursive
-- git submodule update
 
 install:
 - npm install hexo-cli -g
 - npm install
 
 script:
+- git submodule init
+- git submodule update
 - hexo clean
 - hexo g
 - hexo d
