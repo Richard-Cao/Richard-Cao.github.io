@@ -18,6 +18,7 @@ before_install:
 - cp .travis/ssh_config ~/.ssh/config
 - git config --global user.name 'Richard-Cao'
 - git config --global user.email '403164405@qq.com'
+- sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 
 install:
 - npm install hexo-cli -g
