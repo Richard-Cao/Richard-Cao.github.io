@@ -1,6 +1,6 @@
 title: Reading App Write In React-Native
 date: 2016-02-06 14:56:57
-categories: reading
+categories: open source
 tags: react-native
 ---
 转载请注明出处：http://richardcao.me/
