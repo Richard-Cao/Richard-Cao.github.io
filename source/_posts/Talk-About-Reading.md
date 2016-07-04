@@ -1,6 +1,6 @@
 title: 聊聊我的处女作：reading
 date: 2016-07-05 00:36:54
-categories:
+categories: open source
 tags: react-native
 ---
 转载请注明出处：http://richardcao.me/
