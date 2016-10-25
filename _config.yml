@@ -69,6 +69,10 @@ theme: next
 stylus:
   compress: true
 
+html_minifier:
+  enable: true
+  exclude:
+
 # Local Search
 search:
   path: search.xml
