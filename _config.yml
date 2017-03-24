@@ -92,11 +92,6 @@ feed:
 social:
   github: https://github.com/Richard-Cao
 
-# duoshuo
-duoshuo_shortname: richardcao
-duoshuo_hotartical: true
-duoshuo_share: true
-
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
