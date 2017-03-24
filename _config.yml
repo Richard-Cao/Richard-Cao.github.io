@@ -69,8 +69,10 @@ theme: next
 stylus:
   compress: true
 
+# Minifier
 html_minifier:
   enable: true
+  ignore_error: false
   exclude:
 
 # Local Search
