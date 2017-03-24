@@ -3,7 +3,6 @@ date: 2016-09-07 18:55:27
 categories: hybrid
 tags: react-native
 ---
-转载请注明出处：http://richardcao.me/
 
 > 有一段时间没写react-native redux相关文章了，使用中多多少少有些感悟，总结了一些，这次把它写出来。
 

@@ -3,7 +3,6 @@ date: 2016-05-28 23:53:25
 categories:	testing
 tags: react-native
 ---
-转载请注明出处：http://richardcao.me/
 
 这两天，我尝试了一下在开发react-native app的过程中如何去组建一套比较容易理解和使用的测试框架进行UT和component UT，这里做一下整理。
 PS：最终代码在reading项目中, [欢迎关注](https://github.com/attentiveness/reading)。

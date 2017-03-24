@@ -3,7 +3,6 @@ date: 2016-02-06 14:56:57
 categories: open source
 tags: react-native
 ---
-转载请注明出处：http://richardcao.me/
 
 **reading项目开源地址：https://github.com/attentiveness/reading**
 ## Reading App Write In React-Native

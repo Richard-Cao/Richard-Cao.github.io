@@ -3,7 +3,6 @@ date: 2016-07-05 00:36:54
 categories: open source
 tags: react-native
 ---
-转载请注明出处：http://richardcao.me/
 
 **[戳我关注reading](https://github.com/attentiveness/reading)**
 

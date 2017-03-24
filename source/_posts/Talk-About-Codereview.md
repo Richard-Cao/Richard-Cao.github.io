@@ -3,7 +3,6 @@ date: 2016-09-30 11:26:27
 categories: 杂谈
 tags: code review tools
 ---
-转载请注明出处：http://richardcao.me/
 
 > 最近思考一个问题，如何进行高效的codereview，有没有好的工具可以使用，于是花了两三天时间在Google里淘了一番，这里留下记录。
 

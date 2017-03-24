@@ -3,7 +3,7 @@ date: 2016-01-12 00:26:21
 categories: hybrid
 tags: react-native
 ---
-转载请注明出处：http://richardcao.me/
+
 > 经过上次的react-native小模块完成之后，发现不少缺点，而且基本没什么扩展性。这次正好又增加一个react-native模块————我的等级特权，于是动手重构了项目里整个react-native的部分，随着今晚项目发布上线，动手记录下来这次重构的经验。
 
 本文目录

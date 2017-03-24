@@ -3,7 +3,6 @@ date: 2016-05-29 19:51:36
 categories: 源码分析
 tags: retrofit
 ---
-转载请注明出处：http://richardcao.me/
 
 > 本文将顺着**构建请求对象→构建请求接口→发起同步/异步请求**的流程，分析retrofit2是如何实现的。
 

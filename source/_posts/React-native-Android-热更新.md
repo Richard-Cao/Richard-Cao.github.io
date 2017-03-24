@@ -3,7 +3,6 @@ date: 2015-12-03 21:58:00
 categories: hybrid
 tags: react-native
 ---
-转载请注明出处：http://richardcao.me/
 
 继上次[React-native Android 初次踩坑之旅](http://richard-cao.github.io/2015/11/24/React-native-Android-%E5%88%9D%E6%AC%A1%E8%B8%A9%E5%9D%91%E4%B9%8B%E6%97%85/)的分享之后，这次分享的内容是React-native Android 热更新实现。
 

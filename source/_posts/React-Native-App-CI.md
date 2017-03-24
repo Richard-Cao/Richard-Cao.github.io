@@ -3,7 +3,6 @@ date: 2016-12-11 22:25:50
 categories: hybrid
 tags: react-native
 ---
-转载请注明出处：http://richardcao.me/
 
 应一些小伙伴之邀，总结一篇关于react-native app CI配置的文章，分享出来抛砖引玉~
 
