@@ -3,7 +3,7 @@ language: node_js
 sudo: false
 
 node_js:
-- 6.9.1
+- 6.11.1
 
 branches:
   only:
@@ -24,8 +24,8 @@ before_install:
 - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 
 install:
-- npm install hexo-cli -g
-- npm install
+- travis_wait npm install hexo-cli -g
+- travis_wait npm install
 
 script:
 - git submodule init
