@@ -22,6 +22,7 @@ before_install:
 - git config --global user.name 'Richard-Cao'
 - git config --global user.email '403164405@qq.com'
 - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+- ssh-agent -k
 
 install:
 - travis_wait npm install hexo-cli -g
