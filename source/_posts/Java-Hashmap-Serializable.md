@@ -52,7 +52,7 @@ public HashMap<String, String> getChooseMap() {
 
 首先我要庆幸的是，我的listview是应该拿到后端接口数据之后渲染的，既然控制台没有相关的日志输出，我就debug了一下，看看是不是后端的数据问题。结果我发现了一个让我惊讶的现象，在我处理请求返回的代码中，我正好做了deep clone操作，结果出现了如下错误：
 
-![deep clone error](http://7xr0xq.com1.z0.glb.clouddn.com/deep_clone_error.png)
+![deep clone error](/images/deep_clone_error.png)
 
 咦，控制台毛错没报，为毛一debug就出现了这个问题？在一开始的代码里，我在方法注释里已经写了，**深度拷贝 要求data对象及其引用对象都实现了Serializable接口才可以用**。这个错太打脸了，我竟然传了一个没有实现序列化接口的对象？再根据刚才的推断，难道说hashmap没有实现序列化接口？
 
@@ -122,7 +122,7 @@ if (clDesc.hasMethodWriteReplace()){
 
 于是再次debug。不看不知道，一看吓一跳！我发现原来问题出现在这里：
 
-![writeObject_error](http://7xr0xq.com1.z0.glb.clouddn.com/writeObject_error.png)
+![writeObject_error](/images/writeObject_error.png)
 
 What?!原来错误是从这里报出来的。我仔细看了一下报错后面的信息，居然是一个其他的类，确实不是一个可以序列化的类。
 

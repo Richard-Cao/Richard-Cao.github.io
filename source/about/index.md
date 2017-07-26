@@ -17,4 +17,4 @@ comments: false
 
 如果想和我聊聊的，可以加我微信：
 
-![MyWechat](http://7xr0xq.com1.z0.glb.clouddn.com/wechat.jpg)
+![MyWechat](/images/wechat.jpg)

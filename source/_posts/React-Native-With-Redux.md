@@ -24,13 +24,13 @@ tags: react-native
 ## Flux模式与Redux
 ### Flux模式
 首先，我们知道，react-native根据什么render UI呢？答案就是state和props。那么可以预料到，当模块增多、代码量增加的话，如果没有一套数据流规范，那么就会遇到state或props不统一导致刷新错乱等问题。react是遵循Flux架构的，那么什么是Flux呢？这里我们看一张图：
-![Flux](http://cdn4.infoqstatic.com/statics_s1_20160105-0313u5/resource/news/2014/05/facebook-mvc-flux/zh/resources/0519001.png)
+![Flux](/images/facebook-mvc-flux.png)
 Store包含了应用的所有数据，Dispatcher替换了原来的Controller，当Action触发时，决定了Store如何更新。当Store变化后，View同时被更新，还可以生成一个由Dispatcher处理的Action。这确保了数据在系统组件间单向流动。当系统有多个Store和View时，仍可视为只有一个Store和一个View，因为数据只朝一个方向流动，并且不同的Store和View之间不会直接影响彼此。(这段话引用自[
-Facebook：MVC不适合大规模应用，改用Flux](http://www.infoq.com/cn/news/2014/05/facebook-mvc-flux))
+Facebook：MVC不适合大规模应用，改用Flux](https://www.infoq.com/cn/news/2014/05/facebook-mvc-flux))
 ### Redux
 那么Redux是什么呢？Redux是javascript状态容器，提供可预测化的状态管理，可以构建一致化的应用，除了和React一起用外，还支持其他界面库，体积小（只有2kb）而且没有任何依赖。
-Redux由[Flux](http://facebook.github.io/flux/)演变而来，但是避开了Flux的复杂性，上手快，使用简单，而且社区活跃，是目前主流的Flux数据流框架。
-关于Redux文档可以看[英文原版](http://rackt.org/redux/)和[中文翻译版](http://camsong.github.io/redux-in-chinese/)。
+Redux由[Flux](https://facebook.github.io/flux/)演变而来，但是避开了Flux的复杂性，上手快，使用简单，而且社区活跃，是目前主流的Flux数据流框架。
+关于Redux文档可以看[英文原版](http://redux.js.org/)和[中文翻译版](http://camsong.github.io/redux-in-chinese/)。
 
 ---
 > 从这里开始，默认读者已经阅读过Redux文档，有Redux基础。
@@ -224,7 +224,7 @@ export default connect(mapStateToProps)(RankContainer);
 这里可以看到，所有的页面都是`组件`，这里的`<Rank />`就是等级特权页面组件，包括自定义控件等组件全部放入components包中，于是整个工程被组件化了，更容易与iOS进行融合。然后在utils包中定义utils，constants包中写了ActionTypes和Urls。在新增模块的时候，思路已经非常清晰了，其实就是做**填空题**：在ActionTypes中添加动作定义，在actions中定义Action，在reducers中定义reducer，然后在containers中写好容器外壳，最后在components中写组件，个人感觉是**可扩展的弹性小架构**，思路、封装、数据流、组件等等都比较清晰，目前这就是我重构之后的样子了。因为这些都是我一个人摸索的，等与公司的web工程师们交流时他们或许会给出更好的建议，期待ing~~
 
 最后附上我的工程目录(IDE: Sublime Text 3)：
-![react-native](http://7xr0xq.com1.z0.glb.clouddn.com/react-native.jpg)
+![react-native](/images/react-native.jpg)
 
 至此，本文结束。
 欢迎大家互相交流讨论。我只是菜鸡，抛砖引玉~

@@ -103,7 +103,7 @@ git工作流我就不在这里赘述了，大家可以参照[A successful Git br
 
 这是我们目前的Reading敏捷开发板展示，可以看到我们已经在计划做0.1.4版本的需求了
 
-![Reading敏捷开发展示](http://7xr0xq.com1.z0.glb.clouddn.com/Reading%E6%95%8F%E6%8D%B7%E5%BC%80%E5%8F%91%E5%B1%95%E7%A4%BA.jpg)
+![Reading敏捷开发展示](/images/ReadingBoard.jpg)
 
 ## 最后再说几句
 欢迎大家[star，fork，pr，issue](https://github.com/attentiveness/reading)，和reading、和我们一起成长~
@@ -114,4 +114,4 @@ git工作流我就不在这里赘述了，大家可以参照[A successful Git br
 
 **Reading会持续更新下去的，希望能得到大家的支持和鼓励。你们的鼓励是我们前进的动力！**
 
-![Reading in Facebook react-native showcase](http://7xr0xq.com1.z0.glb.clouddn.com/reading_in_react-native_showcase.jpg)
+![Reading in Facebook react-native showcase](/images/reading_in_react-native_showcase.jpg)
