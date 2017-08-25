@@ -167,7 +167,7 @@ sidebar:
 scroll_to_more: true
 
 # Automatically saving scroll position on each post/page in cookies.
-save_scroll: true
+save_scroll: false
 
 # Automatically excerpt description in homepage as preamble text.
 excerpt_description: true
@@ -222,7 +222,7 @@ toc_list_number: true
 mobile_layout_economy: false
 
 # Android Chrome header panel color ($black-deep).
-android_chrome_color: "#222"
+android_chrome_color: "#2196f3"
 
 # Custom Logo.
 # !!Only available for Default Scheme currently.
@@ -295,7 +295,7 @@ font:
 # MathJax Support
 mathjax:
   enable: true
-  cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
 
 # Han Support docs: https://hanzi.pro/
 han: true
