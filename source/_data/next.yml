@@ -39,37 +39,28 @@ seo: true
 # subtitle: Subtitle
 index_with_subtitle: false
 
-
 # ---------------------------------------------------------------
 # Menu Settings
 # ---------------------------------------------------------------
 
-# When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash (/archives -> archives)
+# When running the site in a subdirectory (e.g. domain.tld/blog), remove the leading slash from link value (/archives -> archives).
+# Usage: `Key: /link/ || icon`
+# Key is the name of menu item. If translate for this menu will find in languages - this translate will be loaded; if not - Key name will be used. Key is case-senstive.
+# Value before `||` delimeter is the target link.
+# Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
-  home: /
-  categories: /categories
-  about: /about
-  archives: /archives
-  tags: /tags
-  #sitemap: /sitemap.xml
-  #commonweal: /404.html
+  home: / || home
+  about: /about/ || user
+  tags: /tags/ || tags
+  categories: /categories/ || th
+  archives: /archives/ || archive
+  # schedule: /schedule/ || calendar
+  # sitemap: /sitemap.xml || sitemap
+  # commonweal: /404/ || heartbeat
 
 # Enable/Disable menu icons.
-# Icon Mapping:
-#   Map a menu item to a specific FontAwesome icon name.
-#   Key is the name of menu item and value is the name of FontAwesome icon. Key is case-senstive.
-#   When an question mask icon presenting up means that the item has no mapping icon.
 menu_icons:
   enable: true
-  #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
-  home: home
-  about: user
-  categories: th
-  # schedule: calendar
-  tags: tags
-  archives: archive
-  # sitemap: sitemap
-  # commonweal: heartbeat
 
 # ---------------------------------------------------------------
 # Scheme Settings
@@ -83,25 +74,27 @@ scheme: Pisces
 # Sidebar Settings
 # ---------------------------------------------------------------
 
-# Social Links
+# Social Links.
+# Usage: `Key: permalink || icon`
 # Key is the link label showing to end users.
-# Value is the target link (E.g. GitHub: https://github.com/iissnan)
-#social:
-  #github: https://github.com/Richard-Cao
+# Value before `||` delimeter is the target permalink.
+# Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
+social:
+  GitHub: https://github.com/Richard-Cao || github
+  E-Mail: mailto:caolicheng921104@gmail.com || envelope
+  # Google: https://plus.google.com/yourname || google
+  # Twitter: https://twitter.com/yourname || twitter
+  # FB Page: https://www.facebook.com/yourname || facebook
+  # VK Group: https://vk.com/yourname || vk
+  # StackOverflow: https://stackoverflow.com/yourname || stack-overflow
+  # YouTube: https://youtube.com/yourname || youtube
+  # Instagram: https://instagram.com/yourname || instagram
+  # Skype: skype:yourname?call|chat || skype
 
-# Social Links Icons
-# Icon Mapping:
-#   Map a menu item to a specific FontAwesome icon name.
-#   Key is the name of the item and value is the name of FontAwesome icon. Key is case-senstive.
-#   When an globe mask icon presenting up means that the item has no mapping icon.
 social_icons:
   enable: true
-  # Icon Mappings.
-  # KeyMapsToSocialItemKey: NameOfTheIconFromFontAwesome
-  GitHub: github
-  Twitter: twitter
-  Weibo: weibo
-  Email: envelope
+  icons_only: false
+  transition: false
 
 # Blog rolls
 #links_title: Links
@@ -205,14 +198,12 @@ post_copyright:
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-#Pay
+# Reward
 reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
 wechatpay: /images/wechatpay.jpg
+# alipay: /images/alipay.jpg
+# bitcoin: /images/bitcoin.png
 
-# Use Lato font
-use_font_lato: true
-# 是否为侧边栏文章的目录自动添加索引，默认开启。设置为 `false` 关闭。
-toc_list_number: true
 
 # ---------------------------------------------------------------
 # Misc Theme Settings
@@ -336,8 +327,8 @@ changyan:
 # Available value:
 #    button | slide
 # Warning: Baidu Share does not support https.
-baidushare: true
-type: button
+# baidushare: true
+# type: button
 
 # Share
 #jiathis:

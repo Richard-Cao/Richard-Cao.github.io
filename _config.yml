@@ -122,11 +122,6 @@ feed:
   path: atom.xml
   limit: 20
 
-#Social links
-social:
-  GitHub: https://github.com/Richard-Cao
-  Email: mailto:caolicheng921104@gmail.com
-
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
