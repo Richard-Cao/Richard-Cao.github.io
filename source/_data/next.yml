@@ -241,7 +241,7 @@ highlight_theme: night
 # - Introduce in 5.0.1
 # ---------------------------------------------------------------
 font:
-  enable: true
+  enable: false
 
   # Uri of fonts host. E.g. //fonts.googleapis.com (Default)
   host:
@@ -298,7 +298,7 @@ han: true
 baidu_analytics: 81bfa0d04c3d95fc8164207e06fbc43d
 
 # Google Analytics ID
-google_analytics: UA-71065147-1
+# google_analytics: UA-71065147-1
 
 # Disqus
 disqus:
