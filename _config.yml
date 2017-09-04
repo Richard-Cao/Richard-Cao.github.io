@@ -79,10 +79,8 @@ css_minifier:
   exclude: 
     - '*.min.css'
 js_minifier:
-  enable: false
+  enable: true
   mangle: true
-  output:
-  compress:
   exclude: 
     - '*.min.js'
 image_minifier:
