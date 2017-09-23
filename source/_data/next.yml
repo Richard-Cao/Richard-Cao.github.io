@@ -1,4 +1,12 @@
 # ---------------------------------------------------------------
+# Theme Core Configuration Settings
+# ---------------------------------------------------------------
+
+# Set to true, if you want to fully override the default configuration.
+# Useful if you don't want to inherit the theme _config.yml configurations.
+override: false
+
+# ---------------------------------------------------------------
 # Site Information Settings
 # ---------------------------------------------------------------
 
@@ -67,8 +75,10 @@ menu_icons:
 # ---------------------------------------------------------------
 
 # Schemes
+#scheme: Muse
 #scheme: Mist
 scheme: Pisces
+#scheme: Gemini
 
 # ---------------------------------------------------------------
 # Sidebar Settings
@@ -140,7 +150,7 @@ sidebar:
 
   # Sidebar offset from top menubar in pixels.
   offset: 12
-  offset_float: 0
+  offset_float: 12
 
   # Back to top in sidebar
   b2t: false
@@ -240,33 +250,42 @@ highlight_theme: night
 # - Be aware that setting too much fonts will cause site running slowly
 # - Introduce in 5.0.1
 # ---------------------------------------------------------------
+# CAUTION! Safari Version 10.1.2 bug: https://github.com/iissnan/hexo-theme-next/issues/1844
+# To avoid space between header and sidebar in Pisces / Gemini themes recommended to use Web Safe fonts for `global` (and `logo`):
+# Arial | Tahoma | Helvetica | Times New Roman | Courier New | Verdana | Georgia | Palatino | Garamond | Comic Sans MS | Trebuchet MS
+# ---------------------------------------------------------------
 font:
   enable: false
 
-  # Uri of fonts host. E.g. //fonts.googleapis.com (Default)
+  # Uri of fonts host. E.g. //fonts.googleapis.com (Default).
   host:
+
+  # Font options:
+  # `external: true` will load this font family from `host` above.
+  # `family: Times New Roman`. Without any quotes.
+  # `size: xx`. Use `px` as unit.
 
   # Global font settings used on <body> element.
   global:
-    # external: true will load this font family from host.
     external: true
     family: Lato
+    size:
 
-  # Font settings for Headlines (h1, h2, h3, h4, h5, h6)
+  # Font settings for Headlines (h1, h2, h3, h4, h5, h6).
   # Fallback to `global` font settings.
   headings:
     external: true
     family:
+    size:
 
-  # Font settings for posts
+  # Font settings for posts.
   # Fallback to `global` font settings.
   posts:
     external: true
     family:
 
-  # Font settings for Logo
+  # Font settings for Logo.
   # Fallback to `global` font settings.
-  # The `size` option use `px` as unit
   logo:
     external: true
     family:
@@ -315,6 +334,17 @@ changyan:
   appid:
   appkey:
 
+# Valine.
+# You can get your appid and appkey from https://leancloud.cn
+# more info please open https://github.com/xCss/Valine
+valine:
+  enable: false
+  appid:  # your leancloud application appid
+  appkey:  # your leancloud application appkey
+  notify: false # mail notifier , https://github.com/xCss/Valine/wiki
+  verify: false # Verification code
+  placeholder: Comment input placeholder
+
 # Support for youyan comments system.
 # You can get your uid from http://www.uyan.cc
 #youyan_uid: your uid
@@ -331,8 +361,11 @@ changyan:
 # type: button
 
 # Share
-#jiathis:
+# This plugin is more useful in China, make sure you known how to use it.
+# And you can find the use guide at official webiste: http://www.jiathis.com/.
 # Warning: JiaThis does not support https.
+#jiathis:
+  ##uid: Get this uid from http://www.jiathis.com/
 #add_this_id:
 
 # Google Webmaster tools verification setting
