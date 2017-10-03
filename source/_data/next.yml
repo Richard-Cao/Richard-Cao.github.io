@@ -10,8 +10,17 @@ override: false
 # Site Information Settings
 # ---------------------------------------------------------------
 
-# Put your favicon.ico into `hexo-site/source/` directory.
-favicon: /images/shuimen.jpg
+# To get favicons visit: https://realfavicongenerator.net
+# Put your favicons into `hexo-site/source/` or `hexo-site/themes/next/source/images/` directory.
+# Default NexT favicons placed in `hexo-site/themes/next/source/images/` directory.
+# And if you want to place your icons in `hexo-site/source/`, you must remove `/images` prefix from pathes.
+favicon:
+  small: /images/favicon-small.png
+  medium: /images/favicon-medium.png
+  apple_touch_icon: /images/apple-touch.png
+  safari_pinned_tab: /images/safari-pinned-tab.svg
+  #android_manifest: /images/manifest.json
+  #ms_browserconfig: /images/browserconfig.xml
 
 # Set default keywords (Use a comma to separate)
 keywords: "React-Native, Android"
@@ -21,14 +30,28 @@ keywords: "React-Native, Android"
 # Set rss to specific value if you have burned your feed already.
 rss: /atom.xml
 
-# Specify the date when the site was setup
-#since: 2015
+footer:
+  # Specify the date when the site was setup.
+  # If not defined, current year will be used.
+  #since: 2015
 
-# icon between year and author @Footer
-authoricon: heart
+  # Icon between year and copyright info.
+  icon: user
 
-# Footer `powered-by` and `theme-info` copyright
-copyright: true
+  # If not defined, will be used `author` from Hexo main config.
+  copyright:
+  # -------------------------------------------------------------
+  # Hexo link (Powered by Hexo).
+  powered: true
+
+  theme:
+    # Theme & scheme info link (Theme - NexT.scheme).
+    enable: true
+    # Version info of NexT after scheme info (vX.X.X).
+    version: true
+  # -------------------------------------------------------------
+  # Any custom text can be defined here.
+  #custom_text: Hosted by <a target="_blank" href="https://pages.github.com">GitHub Pages</a>
 
 
 # ---------------------------------------------------------------
@@ -157,7 +180,7 @@ sidebar:
   # Scroll percent label in b2t button
   scrollpercent: true
 
-  # Enable sidebar on narrow view
+  # Enable sidebar on narrow view (only for Muse | Mist).
   onmobile: false
 
 
@@ -304,6 +327,7 @@ font:
 # MathJax Support
 mathjax:
   enable: true
+  per_page: false
   cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
 
 # Han Support docs: https://hanzi.pro/
@@ -374,6 +398,10 @@ valine:
 # Google Analytics
 #google_analytics:
 
+# Bing Webmaster tools verification setting
+# See: https://www.bing.com/webmaster/
+#bing_site_verification:
+
 # Yandex Webmaster tools verification setting
 # See: https://webmaster.yandex.ru/
 #yandex_site_verification:
@@ -385,7 +413,8 @@ valine:
 # See https://azure.microsoft.com/en-us/services/application-insights/
 # application_insights:
 
-
+# Post widgets & FB/VK comments settings.
+# ---------------------------------------------------------------
 # Facebook SDK Support.
 # https://github.com/iissnan/hexo-theme-next/pull/410
 facebook_sdk:
@@ -419,7 +448,7 @@ rating:
   enable: false
   id:     #<app_id>
   color:  fc6423
-
+# ---------------------------------------------------------------
 
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
@@ -499,6 +528,7 @@ local_search:
 # ---------------------------------------------------------------
 # Tags Settings
 # ---------------------------------------------------------------
+
 # External URL with BASE64 encrypt & decrypt
 # Usage: {% exturl text url "title" %}
 # Alias: {% extlink text url "title" %}
