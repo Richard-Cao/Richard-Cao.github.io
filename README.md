@@ -1,3 +1,3 @@
-# [richardcao.me](http://richardcao.me/)
+# [richardcao.me](https://richardcao.me/)
 
 [![Build Status](https://travis-ci.org/Richard-Cao/Richard-Cao.github.io.svg?branch=hexo)](https://travis-ci.org/Richard-Cao/Richard-Cao.github.io)
