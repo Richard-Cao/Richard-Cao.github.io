@@ -7,14 +7,14 @@ title: Lifecycle
 subtitle: 真正的梦就是现实的彼岸。
 description: 不积小流，无以成江海。
 author: RichardCao
-language: zh-Hans
+language: zh-CN
 timezone:
 avatar: /images/avatar.jpg
 since: 2015
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://richardcao.me/
+url: https://richardcao.me/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -70,26 +70,38 @@ stylus:
   compress: true
 
 # Minifier
+# https://github.com/chenzhutian/hexo-all-minifier
+js_concator:
+  enable: false
+  bundle_path: '/js/bundle.js'
+  front: false
+  silent: false
 html_minifier:
   enable: true
   ignore_error: false
+  silent: false
   exclude:
 css_minifier:
   enable: true
+  silent: false
   exclude: 
     - '*.min.css'
 js_minifier:
-  enable: true
+  enable: false
   mangle: true
+  silent: false
+  output:
+  compress:
   exclude: 
     - '*.min.js'
 image_minifier:
-  enable: true
+  enable: false
   interlaced: false
   multipass: false
   optimizationLevel: 2
   pngquant: false
   progressive: false
+  silent: false
 
 # Offline
 ## Config passed to sw-precache
