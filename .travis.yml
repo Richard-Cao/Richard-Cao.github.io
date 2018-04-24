@@ -27,10 +27,16 @@ before_install:
 install:
 - travis_wait npm install hexo-cli -g
 - travis_wait npm install
-
-script:
 - git submodule init
 - git submodule update
+- cd themes/next
+- git clone https://github.com/theme-next/theme-next-canvas-nest source/lib/canvas-nest
+- git clone https://github.com/theme-next/theme-next-han source/lib/Han
+- git clone https://github.com/theme-next/theme-next-needmoreshare2 source/lib/needsharebutton
+- git clone https://github.com/theme-next/theme-next-pangu.git source/lib/pangu
+- cd $HOME/build/Richard-Cao/Richard-Cao.github.io
+
+script:
 - hexo clean
 - hexo g
 - hexo d
