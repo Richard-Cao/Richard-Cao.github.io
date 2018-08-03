@@ -6,7 +6,7 @@ tags: Java
 
 ## 背景
 
-由于一些xxxxoooo的原因，我需要修复一个Service可能会被外部传入intent数据导致拒绝服务的问题。当被告知这个问题的时候，我是一脸懵逼的。
+由于一些xxxxoooo的原因，我需要修复一个**跨进程**Service可能会被外部传入intent数据导致拒绝服务的问题。当被告知这个问题的时候，我是一脸懵逼的。
 
 复现这个问题的测试代码如下：
 
@@ -173,4 +173,4 @@ private final Serializable readSerializable(final ClassLoader loader) {
 
 ## 总结
 
-修复方式也简单，在对外暴露的Activity、Service或者Broadcast等需要用到intent的地方，不管是putXXX还是getXXX（getXXX也需要执行unparcel方法）操作，都加上try-catch抓住这个错误就可以了。说实话，这个问题我第一次遇到，这是一个安全性问题，算是让我记忆深刻了，以后不能再踩这个坑了。
+修复方式也简单，在**对外暴露（跨进程）**的Activity、Service或者Broadcast等需要用到intent的地方，不管是putXXX还是getXXX（getXXX也需要执行unparcel方法）操作，都加上try-catch抓住这个错误就可以了。说实话，这个问题我第一次遇到，这是一个安全性问题，算是让我记忆深刻了，以后不能再踩这个坑了。
