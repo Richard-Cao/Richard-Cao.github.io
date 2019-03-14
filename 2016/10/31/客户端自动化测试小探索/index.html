@@ -1,0 +1,375 @@
+<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#2196f3"><link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css"><link rel="stylesheet" href="/lib/Han/dist/han.min.css?v=3.3"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"><link rel="stylesheet" href="/css/main.css?v=7.0.1"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=7.0.1"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-medium.png?v=7.0.1"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-small.png?v=7.0.1"><link rel="mask-icon" href="/images/safari-pinned-tab.svg?v=7.0.1" color="#2196f3"><link rel="manifest" href="/manifest.json"><script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"7.0.1",sidebar:{position:"left",display:"post",offset:12,b2t:!0,scrollpercent:!0,onmobile:!1,dimmer:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><meta name="description" content="本文背景：最近花了两三天时间小探索了一下客户端的自动化测试，起因是因为公司项目在提测之前必须自己手点一些固有的测试case，确定没问题才能提测。实在懒得点，就想探寻一下有没有比较简单的办法解决这个问题。技术选型客户端测试我了解的不是很专业，在我的之前的认知里，主要由appium，macaca等构成，都是通过脚本去控制UI的各种操作，抓取元素模拟点击等等。适用场景上，确实比较适合做一些固有case的"><meta name="keywords" content="calabash"><meta property="og:type" content="article"><meta property="og:title" content="客户端自动化测试小探索"><meta property="og:url" content="https://richardcao.me/2016/10/31/客户端自动化测试小探索/index.html"><meta property="og:site_name" content="Lifecycle"><meta property="og:description" content="本文背景：最近花了两三天时间小探索了一下客户端的自动化测试，起因是因为公司项目在提测之前必须自己手点一些固有的测试case，确定没问题才能提测。实在懒得点，就想探寻一下有没有比较简单的办法解决这个问题。技术选型客户端测试我了解的不是很专业，在我的之前的认知里，主要由appium，macaca等构成，都是通过脚本去控制UI的各种操作，抓取元素模拟点击等等。适用场景上，确实比较适合做一些固有case的"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2019-03-14T07:05:40.285Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="客户端自动化测试小探索"><meta name="twitter:description" content="本文背景：最近花了两三天时间小探索了一下客户端的自动化测试，起因是因为公司项目在提测之前必须自己手点一些固有的测试case，确定没问题才能提测。实在懒得点，就想探寻一下有没有比较简单的办法解决这个问题。技术选型客户端测试我了解的不是很专业，在我的之前的认知里，主要由appium，macaca等构成，都是通过脚本去控制UI的各种操作，抓取元素模拟点击等等。适用场景上，确实比较适合做一些固有case的"><link rel="alternate" href="/atom.xml" title="Lifecycle" type="application/atom+xml"><link rel="canonical" href="https://richardcao.me/2016/10/31/客户端自动化测试小探索/"><script id="page.configurations">CONFIG.page={sidebar:""}</script><title>客户端自动化测试小探索 | Lifecycle</title><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?81bfa0d04c3d95fc8164207e06fbc43d";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Lifecycle</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description">真正的梦就是现实的彼岸。</h1></div><div class="site-nav-toggle"><button aria-label="切换导航栏"><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://richardcao.me/2016/10/31/客户端自动化测试小探索/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="RichardCao"><meta itemprop="description" content="不积小流，无以成江海。"><meta itemprop="image" content="/images/avatar.gif"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Lifecycle"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">客户端自动化测试小探索</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2016-10-31 15:07:42" itemprop="dateCreated datePublished" datetime="2016-10-31T15:07:42+00:00">2016-10-31</time> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2019-03-14 07:05:40" itemprop="dateModified" datetime="2019-03-14T07:05:40+00:00">2019-03-14</time> </span><span class="post-category"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/testing/" itemprop="url" rel="index"><span itemprop="name">testing</span></a></span> </span><span class="post-comments-count"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-comment-o"></i> </span><span class="post-meta-item-text">评论数：</span> <a href="/2016/10/31/客户端自动化测试小探索/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/10/31/客户端自动化测试小探索/" itemprop="commentCount"></span> </a></span><span id="/2016/10/31/客户端自动化测试小探索/" class="leancloud_visitors" data-flag-title="客户端自动化测试小探索"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="post-meta-item-text">阅读次数：</span> <span class="leancloud-visitors-count"></span></span></div></header><div class="post-body han-init-context" itemprop="articleBody"><blockquote><p>本文背景：最近花了两三天时间小探索了一下客户端的自动化测试，起因是因为公司项目在提测之前必须自己手点一些固有的测试case，确定没问题才能提测。实在懒得点，就想探寻一下有没有比较简单的办法解决这个问题。</p></blockquote><h1 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h1><p>客户端测试我了解的不是很专业，在我的之前的认知里，主要由appium，macaca等构成，都是通过脚本去控制UI的各种操作，抓取元素模拟点击等等。适用场景上，确实比较适合做一些固有case的回归，但是脚本维护的成本略高，不过支持的语言够多，尤其是appium，几乎支持了所有主流语言，我试着写了一下，问题不大，就是当固有case发生变化的时候比较惨，代码很多都没法用了。虽然理论上讲固有case是不会发生变化的，但是在业务导向的团队中，不可能百分百保证固有case不发生变化，尤其还是在一个新业务的探索发展阶段。</p><p>我是一个Android DEVER，那么我想了一个够简单的方法：通过AS2.2版本的新特性：Espresso的单元测试录制，让写UT更轻松。但是在我试过之后发现一个鸡肋的问题：录制好的脚本不更改几乎没法用。因为在大型的app上，元素的定位不是那么简单的，而录制的脚本中几乎都用<code>allOf</code>来定位元素，显然就是不行的，那么维护脚本的成本就大了，很多情况下不亚于直接用appium直接去写，所以这个方案我就放弃掉了。</p><p>我理想中的方案是：维护脚本成本够低、写test case够简单、可读性够强、如果能Android &amp; iOS共用那更棒，最关键的一点：<strong>时间成本要少</strong>。</p><p>于是我邂逅了<a href="http://calaba.sh/" target="_blank" rel="noopener">Calabash</a>。</p><h1 id="Calabash上手"><a href="#Calabash上手" class="headerlink" title="Calabash上手"></a>Calabash上手</h1><p>我第一眼就相中它的原因就是：<strong>它可以用一种类似自然语言的方式编写测试用例</strong>。以往的方式都是TDD，而calabash是BDD，这让我感到很新奇，于是我做了一波尝试。</p><p>先给大家看看我写的第一个固有case（是固有case里最简单的一个）：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Feature: xxx固有用例</span><br><span class="line"></span><br><span class="line">  Scenario: 功能：首页</span><br><span class="line">  	Then I see &quot;跳过&quot;</span><br><span class="line">  	When I press &quot;跳过&quot;</span><br><span class="line">    Then I press &quot;上海&quot;</span><br><span class="line">    When I press view with id &quot;city&quot;</span><br><span class="line">    Then I see &quot;海外&quot;</span><br><span class="line">    When I press &quot;海外&quot;</span><br><span class="line">    And I press view with id &quot;start_search&quot;</span><br><span class="line">    When I enter &quot;东京&quot; into input field number 1</span><br><span class="line">    Then I press list item number 1</span><br><span class="line">    Then I see &quot;东京&quot;</span><br><span class="line">    When I press &quot;美食&quot;</span><br><span class="line">    Then I see &quot;美食&quot;</span><br><span class="line">    Then I go back</span><br><span class="line">    When I see &quot;景点&quot;</span><br><span class="line">    Then I press &quot;景点&quot;</span><br><span class="line">    Then I see &quot;景点&quot;</span><br><span class="line">    Then I go back</span><br><span class="line">    Then I press view with id &quot;title_image&quot;</span><br><span class="line">    Then I wait for 5 seconds</span><br><span class="line">    Then I press webview text &quot;特价机票&quot;</span><br><span class="line">    Then I wait for 5 seconds</span><br><span class="line">    Then I go back</span><br><span class="line">    Then I go back</span><br><span class="line">    When I scroll down recyclerview with id &quot;main_listview&quot; count 5</span><br><span class="line">    Then I see &quot;猜你喜欢&quot;</span><br><span class="line">    Then I press view with id &quot;root_rl&quot; number 1</span><br><span class="line">    Then I wait for 10 seconds</span><br></pre></td></tr></table></figure><p>这个没写过代码的人我相信都看得懂，其实就是用我们常规的思维模式去写测试用例。用法非常简单，如果是Mac的小伙伴那简直不要太爽，天生自带ruby，直接用gem去安装calabash就可以，这里推荐<a href="https://github.com/calabash/calabash-android/blob/master/documentation/installation.md" target="_blank" rel="noopener">安装calabash-android</a>，其实安装calabash-ios应该是类似的，大家去calabash的<a href="https://github.com/calabash" target="_blank" rel="noopener">github organization</a>中找相应平台的repo就可以，这里我以Android为例。</p><p>安装完之后，直接用calabash gen生成目录就可以，固有的目录都会自动生成，其实主要和我们相关的就是<code>features</code>目录。<br>这里面分为三部分：</p><blockquote><ul><li>step宏定义+自定义</li><li>各种hooks的support支持</li><li>自己写的测试用例，文件名用<code>.feature</code>结尾</li></ul></blockquote><p>很简单，上面的测试case就是自己写的测试用例。到这里我突然要告诉大家：calabash只支持ruby。其实如果我不说，估计大家都考虑不到语言，因为从这个case上看，根本看不出语言。不过大家别担心，这里用到ruby的地方无非在一些自定义step和hooks，其他的目前我没发现哪里还需要用了，而且用到的ruby极其基础简单，不需要学，不知道的Google一下就完事了。</p><p>最后用calabash run命令启动就可以，别忘了要有apk或者ipa包，这部分我就不细说了，去github看会比较详细。</p><p>其实到这里就讲完了，接下来我会分享一下我这两天遇到的坑，也是我觉得用calabash的难点。</p><h1 id="疑难杂症"><a href="#疑难杂症" class="headerlink" title="疑难杂症"></a>疑难杂症</h1><h2 id="难点一：定位元素"><a href="#难点一：定位元素" class="headerlink" title="难点一：定位元素"></a>难点一：定位元素</h2><p>这部分以Android为例，显然很多页面经常会出现id相同的情况，那么我们要通过各种手段定位到唯一的元素。Android极其推荐使用sdk tools目录下的<code>uiautomatorviewer</code>进行元素抓取和定位，配合肉眼和calabash console进行定位，三者结合基本上差不多，无非就是花时间多少的问题。那么webview部分calabash也是支持的，主要是通过css以及各种条件筛选进行定位，其中text内容匹配用到的最多。</p><p>这部分只能慢慢摸索，有经验就会快了。</p><p>在定位元素的过程中，会遇到一些宏定义的step不够用的情况，需要自己自定义step。这里给大家看我这两天自定义的几个step：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Then /^I press webview text &quot;([^\&quot;]*)&quot;$/ do |text|</span><br><span class="line">	touch(&quot;android.webkit.WebView css:&apos;a&apos; &#123;textContent CONTAINS[c] &apos;#&#123;text&#125;&apos;&#125;&quot;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">Then /^I press view with id &quot;([^\&quot;]*)&quot; number (\d+)$/ do |id, number|</span><br><span class="line">  tap_when_element_exists(&quot;* id:&apos;#&#123;id&#125;&apos; index:#&#123;number&#125;&quot;)</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">When /^I scroll down recyclerview with id &quot;([^\&quot;]*)&quot; count (\d+)$/ do |id, count|</span><br><span class="line">	for i in 0..Integer(count) </span><br><span class="line">  	scroll(&quot;android.support.v7.widget.RecyclerView id:&apos;#&#123;id&#125;&apos;&quot;, :down)</span><br><span class="line">	end</span><br><span class="line">end</span><br></pre></td></tr></table></figure><p>这ruby很简单把，无非就是包了一层calabash的api然后识别了一下，没啥技术含量，主要就是自己方便用，扩展一下step，这三个自定义的step我在上面的case中都有用到。</p><h2 id="难点二：流程控制"><a href="#难点二：流程控制" class="headerlink" title="难点二：流程控制"></a>难点二：流程控制</h2><h3 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h3><p>我们在上面的case中可以看到有<code>Feature</code>的标识，这是calabash的一个控制单元（我的理解），每运行一个Feature，apk都会卸载重装，保证每次都是全新无副作用的应用。</p><h3 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h3><p>这个标识是囊括在Feature中的，一个Feature可以有很多个Scenario，运行每个Scenario的时候应用只会退出再重进，不会卸载再重装。</p><h3 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h3><p>在feature/support包下，我们会看到这么几个ruby文件：</p><blockquote><ul><li>app_installation_hooks.rb</li><li>app_life_cycle_hooks.rb</li><li>env.rb</li><li>hooks.rb</li></ul></blockquote><p>可以看到，基本上都是hook用的，我们看一个简单的<code>app_life_cycle_hooks.rb</code>理解理解：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">require &apos;calabash-android/management/adb&apos;</span><br><span class="line">require &apos;calabash-android/operations&apos;</span><br><span class="line"></span><br><span class="line">Before do |scenario|</span><br><span class="line">  start_test_server_in_background</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">After do |scenario|</span><br><span class="line">  if scenario.failed?</span><br><span class="line">    screenshot_embed</span><br><span class="line">  end</span><br><span class="line">  shutdown_test_server</span><br><span class="line">end</span><br></pre></td></tr></table></figure><p>这是默认就生成好的，从字面意思上看，就是app生命周期的hook，这里可以看到，在主要用到了<code>Before</code>和<code>After</code>关键字进行操作，这个显然很容易就看懂了，于是我自己写了一个在每个step执行之后都等待2秒的hook，下面的代码写在<code>hooks.rb</code>中（这个文件默认生成是空的）：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">require &apos;calabash-android/calabash_steps&apos;</span><br><span class="line"></span><br><span class="line">AfterStep do |scenario|</span><br><span class="line">	sleep 2</span><br><span class="line">end</span><br></pre></td></tr></table></figure><p>很容易对吧？关于这部分想多了解的可以看<a href="https://github.com/cucumber/cucumber/wiki/Hooks" target="_blank" rel="noopener">cucumber wiki中的Hooks部分</a>。</p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先，calabash是我最后唯一选中的客户端自动化固有case的方案。这里说下原因：</p><blockquote><ul><li>脚本维护成本很低，就算固有case发生变化，也可以花很少的时间迅速更改脚本</li><li>我们的业务固有case数量不大，操作主要涵盖的部分calabash都可以完成，编写脚本的成本低，无语言障碍</li><li>可读性非常强，代码简单易懂，任何一位DEVER都可以零成本上手，有Mac的连装环境都差不多省了</li><li>小范围组内使用成本低，坑有但是并不大，都可以解决，某些机型不兼容问题直接用genymotion跑就行了，最简单（主要还是固有case不复杂）</li><li>Android &amp; iOS都可以使用</li><li>玩起来很有意思，对于我这种懒人来说是福音</li></ul></blockquote><p>估计还有一些高级的玩法我还不会，不过目前这些都够我写一些固有case了，目前我们组内将会对这个方案进行评估，没啥问题就组内小范围用了，如果有感兴趣的朋友欢迎一起讨论唷。</p><p>谢谢大家。</p></div><div><div id="wechat_subscriber" style="display:block;padding:10px 0;margin:20px auto;width:100%;text-align:center"><img id="wechat_subscriber_qcode" src="/images/My_Official_Accounts.jpg" alt="RichardCao wechat" style="width:200px;max-width:100%"><div>欢迎关注我的个人微信公众号，不定期推送精彩内容~</div></div></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"><img id="wechat_qr" src="/images/wechatpay.jpg" alt="RichardCao 微信支付"><p>微信支付</p></div></div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/calabash/" rel="tag"># calabash</a></div><div class="post-widgets"><div class="social_share"><div id="needsharebutton-postbottom"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div></div></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2016/09/30/Talk-About-Codereview/" rel="next" title="聊聊Code Review"><i class="fa fa-chevron-left"></i> 聊聊Code Review</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/2016/12/11/React-Native-App-CI/" rel="prev" title="React Native App CI">React Native App CI <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div><div class="comments" id="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><div class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><p class="site-author-name" itemprop="name">RichardCao</p><p class="site-description motion-element" itemprop="description">不积小流，无以成江海。</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">21</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/index.html"><span class="site-state-item-count">7</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">11</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/Richard-Cao" title="GitHub &rarr; https://github.com/Richard-Cao" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:caolicheng921104@gmail.com" title="E-Mail &rarr; mailto:caolicheng921104@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a></span></div></div></div><div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#技术选型"><span class="nav-number">1.</span> <span class="nav-text">技术选型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Calabash上手"><span class="nav-number">2.</span> <span class="nav-text">Calabash上手</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#疑难杂症"><span class="nav-number">3.</span> <span class="nav-text">疑难杂症</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#难点一：定位元素"><span class="nav-number">3.1.</span> <span class="nav-text">难点一：定位元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#难点二：流程控制"><span class="nav-number">3.2.</span> <span class="nav-text">难点二：流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature"><span class="nav-number">3.2.1.</span> <span class="nav-text">Feature</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scenario"><span class="nav-number">3.2.2.</span> <span class="nav-text">Scenario</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hooks"><span class="nav-number">3.2.3.</span> <span class="nav-text">Hooks</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div></div></div><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2019</span> <span class="with-love" id="animate"><i class="fa fa-user"></i> </span><span class="author" itemprop="copyrightHolder">RichardCao</span></div><div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div><span class="post-meta-divider">|</span><div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="post-meta-item-icon"><i class="fa fa-user"></i> </span><span class="site-uv" title="总访客量"><span class="busuanzi-value" id="busuanzi_value_site_uv"></span> </span><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="site-pv" title="总访问量"><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer></div><script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script><script src="/lib/jquery/index.js?v=2.1.3"></script><script src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script src="/js/src/utils.js?v=7.0.1"></script><script src="/js/src/motion.js?v=7.0.1"></script><script src="/js/src/affix.js?v=7.0.1"></script><script src="/js/src/schemes/pisces.js?v=7.0.1"></script><script src="/js/src/scrollspy.js?v=7.0.1"></script><script src="/js/src/post-details.js?v=7.0.1"></script><script src="/js/src/bootstrap.js?v=7.0.1"></script><script id="dsq-count-scr" src="https://http-richardcao-me.disqus.com/count.js" async></script><script>var disqus_config=function(){this.page.url="https://richardcao.me/2016/10/31/客户端自动化测试小探索/",this.page.identifier="2016/10/31/客户端自动化测试小探索/",this.page.title="客户端自动化测试小探索"};function loadComments(){var t=document,e=t.createElement("script");e.src="https://http-richardcao-me.disqus.com/embed.js",e.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(e)}loadComments()</script><script>// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><script>function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'XDBxSGuHuREHL3P5xSrzSBTB-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'XDBxSGuHuREHL3P5xSrzSBTB-gzGzoHsz',
+                'X-LC-Key': 'juXWzSS5WF9zbzahviwc1yVG',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });</script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="/lib/needsharebutton/needsharebutton.js"></script><script>pbOptions={iconStyle:"default",boxForm:"horizontal",position:"bottomCenter",networks:"Wechat,Weibo,QQZone,Twitter"},new needShareButton("#needsharebutton-postbottom",pbOptions)</script><script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script><script>pangu.spacingPage()</script><style>.copy-btn{display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;line-height:20px;color:#333;white-space:nowrap;vertical-align:middle;cursor:pointer;background-color:#eee;background-image:linear-gradient(#fcfcfc,#eee);border:1px solid #d5d5d5;border-radius:3px;user-select:none;outline:0}.highlight-wrap .copy-btn{transition:opacity .3s ease-in-out;opacity:0;padding:2px 6px;position:absolute;right:4px;top:8px}.highlight-wrap .copy-btn:focus,.highlight-wrap:hover .copy-btn{opacity:1}.highlight-wrap{position:relative}</style><script>$(".highlight").each(function(t,e){var n=$("<div>").addClass("highlight-wrap");$(e).after(n),n.append($("<button>").addClass("copy-btn").append("复制").on("click",function(t){var e=$(this).parent().find(".code").find(".line").map(function(t,e){return $(e).text()}).toArray().join("\n"),n=document.createElement("textarea"),o=window.pageYOffset||document.documentElement.scrollTop;n.style.top=o+"px",n.style.position="absolute",n.style.opacity="0",n.readOnly=!0,n.value=e,document.body.appendChild(n),n.select(),n.setSelectionRange(0,e.length),n.readOnly=!1,document.execCommand("copy")?$(this).text("复制成功"):$(this).text("复制失败"),n.blur(),$(this).blur()})).on("mouseleave",function(t){var e=$(this).find(".copy-btn");setTimeout(function(){e.text("复制")},300)}).append(e)})</script></body></html>

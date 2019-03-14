@@ -1,0 +1,375 @@
+<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#2196f3"><link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css"><link rel="stylesheet" href="/lib/Han/dist/han.min.css?v=3.3"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"><link rel="stylesheet" href="/css/main.css?v=7.0.1"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=7.0.1"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-medium.png?v=7.0.1"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-small.png?v=7.0.1"><link rel="mask-icon" href="/images/safari-pinned-tab.svg?v=7.0.1" color="#2196f3"><link rel="manifest" href="/manifest.json"><script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"7.0.1",sidebar:{position:"left",display:"post",offset:12,b2t:!0,scrollpercent:!0,onmobile:!1,dimmer:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><meta name="description" content="本文背景：项目要上线一个app内部通知中心的功能模块，UI比较简单，ListView为主。之前关注react-native一段时间，所以打算使用react-native踩坑，激进的来一把。本文目录如何把react-native集成到已经存在的Android studio工程中如何调试开发过程中踩过的那些坑Android打包过程中踩过的那些坑本文一切操作均在OS X系统上执行，调试手机为Androi"><meta name="keywords" content="react-native"><meta property="og:type" content="article"><meta property="og:title" content="React-Native Android 初次踩坑之旅"><meta property="og:url" content="https://richardcao.me/2015/11/24/React-native-Android-初次踩坑之旅/index.html"><meta property="og:site_name" content="Lifecycle"><meta property="og:description" content="本文背景：项目要上线一个app内部通知中心的功能模块，UI比较简单，ListView为主。之前关注react-native一段时间，所以打算使用react-native踩坑，激进的来一把。本文目录如何把react-native集成到已经存在的Android studio工程中如何调试开发过程中踩过的那些坑Android打包过程中踩过的那些坑本文一切操作均在OS X系统上执行，调试手机为Androi"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2019-03-14T07:05:40.285Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="React-Native Android 初次踩坑之旅"><meta name="twitter:description" content="本文背景：项目要上线一个app内部通知中心的功能模块，UI比较简单，ListView为主。之前关注react-native一段时间，所以打算使用react-native踩坑，激进的来一把。本文目录如何把react-native集成到已经存在的Android studio工程中如何调试开发过程中踩过的那些坑Android打包过程中踩过的那些坑本文一切操作均在OS X系统上执行，调试手机为Androi"><link rel="alternate" href="/atom.xml" title="Lifecycle" type="application/atom+xml"><link rel="canonical" href="https://richardcao.me/2015/11/24/React-native-Android-初次踩坑之旅/"><script id="page.configurations">CONFIG.page={sidebar:""}</script><title>React-Native Android 初次踩坑之旅 | Lifecycle</title><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?81bfa0d04c3d95fc8164207e06fbc43d";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Lifecycle</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description">真正的梦就是现实的彼岸。</h1></div><div class="site-nav-toggle"><button aria-label="切换导航栏"><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://richardcao.me/2015/11/24/React-native-Android-初次踩坑之旅/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="RichardCao"><meta itemprop="description" content="不积小流，无以成江海。"><meta itemprop="image" content="/images/avatar.gif"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Lifecycle"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">React-Native Android 初次踩坑之旅</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2015-11-24 21:37:27" itemprop="dateCreated datePublished" datetime="2015-11-24T21:37:27+00:00">2015-11-24</time> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2019-03-14 07:05:40" itemprop="dateModified" datetime="2019-03-14T07:05:40+00:00">2019-03-14</time> </span><span class="post-category"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/hybrid/" itemprop="url" rel="index"><span itemprop="name">hybrid</span></a></span> </span><span class="post-comments-count"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-comment-o"></i> </span><span class="post-meta-item-text">评论数：</span> <a href="/2015/11/24/React-native-Android-初次踩坑之旅/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/11/24/React-native-Android-初次踩坑之旅/" itemprop="commentCount"></span> </a></span><span id="/2015/11/24/React-native-Android-初次踩坑之旅/" class="leancloud_visitors" data-flag-title="React-Native Android 初次踩坑之旅"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="post-meta-item-text">阅读次数：</span> <span class="leancloud-visitors-count"></span></span></div></header><div class="post-body han-init-context" itemprop="articleBody"><blockquote><p>本文背景：项目要上线一个app内部通知中心的功能模块，UI比较简单，ListView为主。之前关注react-native一段时间，所以打算使用react-native踩坑，激进的来一把。</p></blockquote><p>本文目录</p><blockquote><ul><li>如何把react-native集成到已经存在的Android studio工程中</li><li>如何调试</li><li>开发过程中踩过的那些坑</li><li>Android打包过程中踩过的那些坑</li></ul></blockquote><p>本文一切操作均在OS X系统上执行，调试手机为Android手机。</p><h2 id="如何把react-native集成到已经存在的Android-studio工程中"><a href="#如何把react-native集成到已经存在的Android-studio工程中" class="headerlink" title="如何把react-native集成到已经存在的Android studio工程中"></a>如何把react-native集成到已经存在的Android studio工程中</h2><p>这部分主要参考官方文档<a href="https://facebook.github.io/react-native/docs/embedded-app-android.html#content" target="_blank" rel="noopener">Intergrating with Existing Apps</a>内容，这里简述一下：</p><h3 id="导入react-native相关引用和权限"><a href="#导入react-native相关引用和权限" class="headerlink" title="导入react-native相关引用和权限"></a>导入react-native相关引用和权限</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile <span class="string">'com.facebook.react:react-native:0.15.1'</span></span><br></pre></td></tr></table></figure><p>我开发的时候最新版本是0.15.1，如果想查看最新版本请戳<a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.facebook.react%22%20AND%20a%3A%22react-native%22" target="_blank" rel="noopener">Maven Central</a>。然后<br>在studio工程中的<code>AndroidManifest.xml</code>中加入<br></p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.INTERNET"</span> /&gt;</span></span><br></pre></td></tr></table></figure><p></p><p>在Android中支持晃动手机或点击菜单键打开react-native的调试页面，需要在<code>AndroidManifest.xml</code>中加入<br></p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">"com.facebook.react.devsupport.DevSettingsActivity"</span> /&gt;</span></span><br></pre></td></tr></table></figure><p></p><p>react-natice需要app的<code>build.gradle</code>文件中配置<code>compileSdkVersion</code>为23，<code>minSdkVersion</code>为16，但是我们项目的app<code>minSdkVersion</code>为15，所以为了支持15，要修改app的<code>build.gradle</code>文件添加如下内容<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">defaultConfig &#123;</span><br><span class="line">   ndk &#123;</span><br><span class="line">      abiFilters &quot;armeabi-v7a&quot;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><p>在<code>AndroidManifext.xml</code>中添加<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-sdk tools:overrideLibrary=&quot;com.facebook.react&quot; /&gt;</span><br></pre></td></tr></table></figure><p></p><p>这时候可能会报一个ndk的错误，只要在<code>gradle.properties</code>中添加<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.useDeprecatedNdk=true</span><br></pre></td></tr></table></figure><p></p><p>即可。</p><h3 id="写好基础的Android原生和js代码"><a href="#写好基础的Android原生和js代码" class="headerlink" title="写好基础的Android原生和js代码"></a>写好基础的Android原生和js代码</h3><p>这部分参照官方文档<a href="https://facebook.github.io/react-native/docs/embedded-app-android.html#content" target="_blank" rel="noopener">Intergrating with Existing Apps</a>中的Add native code和Add JS to your app部分内容。最后官方还提出了如果想要在多个activity或fragment中使用react，需要把<code>ReactInstanceManager</code>用单例实现，这里我的实现很简单：<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReactInstanceManager</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String MODULE_NAME = <span class="string">"CrowdReactApp"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Holder</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> ReactInstanceManager sInstance = ReactInstanceManager.builder()</span><br><span class="line">                    .setApplication((Application) ElemeApplicationContext.getContext())</span><br><span class="line">                    .setBundleAssetName(<span class="string">"index.android.bundle"</span>)</span><br><span class="line">                    .setJSMainModuleName(<span class="string">"react-native/index.android"</span>)</span><br><span class="line">                    .addPackage(<span class="keyword">new</span> MainReactPackage())</span><br><span class="line">                    .addPackage(<span class="keyword">new</span> CrowdReactPackage())</span><br><span class="line">                    .setUseDeveloperSupport(BuildConfig.DEBUG)</span><br><span class="line">                    .setInitialLifecycleState(LifecycleState.RESUMED)</span><br><span class="line">                    .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ReactInstanceManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ReactInstanceManager <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Holder.sInstance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><p>这里的<code>index.android.bundle</code>就是react部分打包生成好的文件，Android打包之后react部分就是根据这个文件来生成代码，热更新也是更换这个文件。<code>react-native/index.android</code>就是react-native目录下的<code>index.android.js</code>文件。这里我在app工程中新建了react-native文件夹，react代码都放入该文件夹中。</p><h3 id="Android原生模块和js部分拆分开发"><a href="#Android原生模块和js部分拆分开发" class="headerlink" title="Android原生模块和js部分拆分开发"></a>Android原生模块和js部分拆分开发</h3><p>js部分我使用Sublime Text 3进行开发。这里简单讲讲我配置的简易插件：</p><ul><li>首先毫无疑问的就是<a href="https://babeljs.io/" target="_blank" rel="noopener">Babel</a>，支持es6语法高亮，在Sublime Text 3中安装请看<a href="https://github.com/babel/babel-sublime" target="_blank" rel="noopener">babel-sublime</a>。</li><li>jsx的语法检查插件，参考<a href="https://github.com/royriojas/esformatter-jsx" target="_blank" rel="noopener">esformatter-jsx</a>，具体安装配置文档已经说的很清楚了，这里不再赘述。若想了解jsx请查看<a href="https://facebook.github.io/react/docs/jsx-in-depth.html" target="_blank" rel="noopener">JSX in Depth</a>。</li></ul><p>至此Android工程中已经集成好react-native模块了。</p><h2 id="如何调试"><a href="#如何调试" class="headerlink" title="如何调试"></a>如何调试</h2><p>在看这一部分之前，要保证上面一部分的内容已经非常仔细的执行完毕，否则一定会报错。尤其是对上面提到的官方文档部分的仔细研读。</p><p>关于react-native的调试我们知道，实际上就是在本地起一个node server，然后当js文件有改动或debug模式下手动选择reload js时候会自动更新bundle文件，达到改动js文件后即时显示的调试效果。</p><p>这里我没有用虚拟机调试，我直接使用真机调试。主要参考官方文档<a href="https://facebook.github.io/react-native/docs/running-on-device-android.html#content" target="_blank" rel="noopener">Running On Device</a>部分，对于Android 5.0以上的手机，在USB调试模式下连接电脑run<code>adb reverse tcp:8081 tcp:8081</code>命令即可，晃动手机弹出调试窗口，选择reload js就可以看到效果。如果是Android5.0以下的手机，在晃动手机或者点击menu键弹出的react-native调试菜单中选择<code>Dev Settings</code>然后配置<code>Debug server host &amp; port for device</code>中配置你当前PC的ip地址加端口号即可，例如<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:8081</span><br></pre></td></tr></table></figure><p></p><p>端口号必须是8081，ip地址根据当前pc的ip地址填写，此时手机和PC必须在同一wifi下，如果用这种方式调试react-native，可以不插USB。<br>在这个页面我们还可以看到一个选项叫<code>Auto reload on JS change</code>，如果我们选择它，就会在选项后面的小方框打勾，启动js改边自动更新的模式，这时候需要安装<code>watchman</code>才可以生效，如何安装<br></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install watchman</span><br></pre></td></tr></table></figure><p></p><p>这里我是安装过homebrew的，如果没有安装的可以看<a href="http://brew.sh/" target="_blank" rel="noopener">Homebrew</a>进行安装配置。</p><p>调试部分内容到此结束。</p><h2 id="开发过程中踩的那些坑"><a href="#开发过程中踩的那些坑" class="headerlink" title="开发过程中踩的那些坑"></a>开发过程中踩的那些坑</h2><p>在开发之前，请务必仔细研读一篇非常优秀的博文<a href="http://www.race604.com/react-native-component-lifecycle/?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io" target="_blank" rel="noopener">React Native中组件的生命周期</a>和官方文档中<a href="https://facebook.github.io/react-native/docs/native-modules-android.html#content" target="_blank" rel="noopener">Native Modules</a>，读懂之后再进行开发。</p><p>我们知道，react的核心就是虚拟DOM，关于这部分网上介绍的文章太多了，在此不再赘述。这里主要以我用到的<a href="https://facebook.github.io/react-native/docs/listview.html#content" target="_blank" rel="noopener">ListView</a>控件和<a href="https://facebook.github.io/react-native/docs/image.html#content" target="_blank" rel="noopener">Image</a>控件两大坑为主进行介绍，满满都是泪。</p><p>首先是ListView的常规写法：<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">getInitialState: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            dataSource: <span class="keyword">new</span> ListView.DataSource(&#123;</span><br><span class="line">                rowHasChanged: <span class="function">(<span class="params">row1, row2</span>) =&gt;</span> row1 !== row2,</span><br><span class="line">            &#125;),</span><br><span class="line">            loaded: <span class="literal">false</span>,</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure><p></p><p>我们需要了解的是，<code>rowHasChanged</code>中代码的意思是，当row1和row2不同时刷新Listview。这里的不同，是指<strong>引用不同</strong>，只是数据不同是不满足这个条件的。这是ListView的坑。说到引用不同，自然而然想到deepclone，Facebook自家提供了一个deepclone的高效解决方案<a href="https://facebook.github.io/immutable-js/" target="_blank" rel="noopener">Immutable</a>。我项目中就用到了它，后面我会讲我是怎么用的。写代码的时候要注意一下，<strong>render中代码如果注释掉会报错的，其他部分的代码可以注释，但是render中的UI部分代码不能注释，要么就删掉，要么就保留</strong>。</p><p>我们的逻辑应当是由数据来控制UI的显示，数据通过HTTP请求得到，那么免不了需要封装网络请求模块，这里我分享一下我是如何封装的<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> NativeManagerAndroid = <span class="built_in">require</span>(<span class="string">'./NativeManagerAndroid'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">RequestService</span>(<span class="params"></span>) </span>&#123; <span class="comment">// Singleton pattern</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> RequestService.instance === <span class="string">'object'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> RequestService.instance;</span><br><span class="line">    &#125;</span><br><span class="line">    RequestService.instance = <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">RequestService.prototype._httpHeader = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    NativeManagerAndroid.header(<span class="function">(<span class="params">header</span>) =&gt;</span> &#123;</span><br><span class="line">        resolve(header);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">RequestService.prototype.request = <span class="function"><span class="keyword">function</span>(<span class="params">url, method, body</span>) </span>&#123;</span><br><span class="line"><span class="keyword">var</span> isOk;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>._httpHeader().then(<span class="function">(<span class="params">header</span>) =&gt;</span> &#123;</span><br><span class="line">        fetch(header.Host + url, &#123;</span><br><span class="line">            method: method,</span><br><span class="line">            headers: &#123;</span><br><span class="line">                <span class="string">'Content-Type'</span>: header.Content_Type,</span><br><span class="line">                <span class="string">'User-Agent'</span>: header.User_Agent,</span><br><span class="line">                <span class="string">'X-VERSION'</span>: header.X_VERSION,</span><br><span class="line">                <span class="string">'X-DEVICE'</span>: <span class="number">1</span>, <span class="comment">//表示Android设备，iOS为2</span></span><br><span class="line">                <span class="string">'API-TIME'</span>: header.API_TIME,</span><br><span class="line">                <span class="string">'API-DEBUG'</span>: header.API_DEBUG,</span><br><span class="line">                <span class="string">'X-TOKEN'</span>: header.X_TOKEN,</span><br><span class="line">                <span class="string">'X-ID'</span>: header.X_ID,</span><br><span class="line">            &#125;,</span><br><span class="line">            body: body,</span><br><span class="line">        &#125;)</span><br><span class="line">            .then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (response.ok) &#123;</span><br><span class="line">                    isOk = <span class="literal">true</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    isOk = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> response.json();</span><br><span class="line">            &#125;)</span><br><span class="line">            .then(<span class="function">(<span class="params">responseData</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (isOk) &#123;</span><br><span class="line">                    resolve(responseData);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    reject(responseData.message);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">                reject(error);</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = RequestService;</span><br></pre></td></tr></table></figure><p></p><p>简单解释一下，这里的<code>NativeManagerAndroid</code>是我封装的Android原生模块的js部分，<code>NativeManagerAndroid.header</code>方法执行的是Android原生事先写好的header方法，关于这部分请再次仔细研读<a href="https://facebook.github.io/react-native/docs/native-modules-ios.html#content" target="_blank" rel="noopener">Native Modules</a>，我这个方法主要是从原生代码中获取http的header，然后使用react-native自带的<code>fetch</code>进行http网络请求的封装。<code>fetch</code>返回的是<code>promise</code>，所以我利用了promise的特性进行封装，关于<code>fetch and promise</code>请仔细研读官方文档<a href="https://facebook.github.io/react-native/docs/network.html#content" target="_blank" rel="noopener">Network</a>部分。注意：<code>response.ok</code>是HTTP CODE在200到300之间。<code>module.exprots = RequestService</code>是指把当前RequestService.js作为一个module，可以在其他js文件中引用。</p><p>注意一下，如果用fetch执行put请求，必须有body，否则会crash，如果没有的话也要传一个空的body，像这样<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> body = <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p></p><p>关于react-native的StyleSheet部分，采用的是flexbox的样式，在开发之前请先阅读<a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener">A Complete Guide to Flexbox</a>。关于点击反馈，请查看官方文档<code>COMPONENTS</code>的TouchableHighlight，TouchableNativeFeedback，TouchableOpacity，TouchableWithoutFeedback。</p><p>关于Immutable.js的使用，我代码中是这么用的<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newDs = [];</span><br><span class="line">newDs = <span class="keyword">this</span>.state.ds.slice();</span><br><span class="line">notice.status = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> changeNotice = Immutable.Map(notice);</span><br><span class="line">newDs[rowID] = changeNotice.toObject();</span><br><span class="line"><span class="keyword">this</span>.setState(&#123;</span><br><span class="line">    dataSource: <span class="keyword">this</span>.state.dataSource.cloneWithRows(newDs),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p></p><p>这段代码已经很好的解释了deepclone在这个模块里的用法，这时候<code>dataSource</code>的引用已经改变了。Immutable.js的运用远不止这么一点，具体还是要在项目中慢慢体会，仔细研读Immutable的官方文档。注意：这里的<code>this.state.ds</code>是每次从网上拉取新数据是本地的备份，参见<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Request.request(NOTICE_LIST_URL, <span class="string">'get'</span>)</span><br><span class="line">    .then(<span class="function">(<span class="params">noticeList</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">            dataSource: <span class="keyword">this</span>.state.dataSource.cloneWithRows(noticeList.notice_list),</span><br><span class="line">            loaded: <span class="literal">true</span>,</span><br><span class="line">            ds: noticeList.notice_list,</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure><p></p><p><code>load</code>状态我是用来判断当前view是否展示loading界面还是listview界面。react的render机制，要么是state改变，要么是props改变，就会执行render进行UI刷新，我主要用到的是通过state来控制是否刷新UI。这里有个优化小技巧，我添加了这么一行代码<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mixins: [React.addons.PureRenderMixin],</span><br></pre></td></tr></table></figure><p></p><p>这样可以减少不必要的render次数，具体参见React的官方文档<a href="https://facebook.github.io/react/docs/pure-render-mixin.html" target="_blank" rel="noopener">PureRenderMixin</a>。</p><p>下面讲讲Image的坑。</p><p>根据react-native的官方文档Image部分，如果需要加载本地静态资源（与Android原生共用图片资源），需要<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Image</span><br><span class="line">  source=&#123;<span class="built_in">require</span>(<span class="string">'image!myIcon'</span>)&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure><p></p><p>但是，当工程跑起来之后，你会发现报了错：提示image!myIcon找不到。这里我反复google才发现2种解决方案：</p><p>1.加载静态图片资源的方法与官网写法一致，启动node server时执行如下命令<br></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native start --assetRoots ./android/app/src/main/res/</span><br></pre></td></tr></table></figure><p></p><p>在debug模式下就可以正常加载本地静态资源并进行调试了，但是在release打包后会crash，原因就是静态资源找不到，暂时没找到解决方案。<br>2.加载静态图片资源的写法改为<br></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Image</span><br><span class="line">  source=&#123; &#123; <span class="attr">uri</span>: <span class="string">"myIcon"</span>, <span class="attr">isStatic</span>: <span class="literal">true</span>&#125; &#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure><p></p><p>启动node server时只要执行<br></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">react-native start</span><br></pre></td></tr></table></figure><p></p><p>即可。这种解决方案在<strong>Android release打包时同样有效</strong>，我目前就采用的这个解决方案。</p><p>这是个大坑，花了好长时间才解决。</p><h2 id="在Android打包过程中踩过的那些坑"><a href="#在Android打包过程中踩过的那些坑" class="headerlink" title="在Android打包过程中踩过的那些坑"></a>在Android打包过程中踩过的那些坑</h2><p>首当其冲的是混淆，原生代码中所有自定义的<code>ReactPackage</code>和<code>ReactContextBaseJavaModule</code>等和reactjs部分配合使用的原生模块都必须keep掉，否则会crash，找不到原生的方法或类。这点我没在官方文档上找到说明，估计是Facebook觉得常识就应该这么做吧……</p><p>Image静态资源问题上面已经讲到了，在打包过程中最后选取的解决方案，这是个坑。</p><p>最后推荐开发过程中可以参考的一个项目<a href="https://github.com/race604/ZhiHuDaily-React-Native" target="_blank" rel="noopener">ZhiHuDaily-React-Native</a>，这个项目的作者也写了相关博客，很有用。</p><p>踩坑还要继续，毕竟以前几乎没有写过js，也是小白，慢慢学习中，比较喜欢React，欢迎与我交流。</p></div><div><div id="wechat_subscriber" style="display:block;padding:10px 0;margin:20px auto;width:100%;text-align:center"><img id="wechat_subscriber_qcode" src="/images/My_Official_Accounts.jpg" alt="RichardCao wechat" style="width:200px;max-width:100%"><div>欢迎关注我的个人微信公众号，不定期推送精彩内容~</div></div></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"><img id="wechat_qr" src="/images/wechatpay.jpg" alt="RichardCao 微信支付"><p>微信支付</p></div></div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/react-native/" rel="tag"># react-native</a></div><div class="post-widgets"><div class="social_share"><div id="needsharebutton-postbottom"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div></div></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2015/11/22/将cordova集成到Android-studio的最佳方法/" rel="next" title="将cordova集成到Android studio的最佳方法"><i class="fa fa-chevron-left"></i> 将cordova集成到Android studio的最佳方法</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/2015/12/03/React-native-Android-热更新/" rel="prev" title="React-Native Android 热更新">React-Native Android 热更新 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div><div class="comments" id="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><div class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><p class="site-author-name" itemprop="name">RichardCao</p><p class="site-description motion-element" itemprop="description">不积小流，无以成江海。</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">21</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/index.html"><span class="site-state-item-count">7</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">11</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/Richard-Cao" title="GitHub &rarr; https://github.com/Richard-Cao" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:caolicheng921104@gmail.com" title="E-Mail &rarr; mailto:caolicheng921104@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a></span></div></div></div><div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何把react-native集成到已经存在的Android-studio工程中"><span class="nav-number">1.</span> <span class="nav-text">如何把react-native集成到已经存在的Android studio工程中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入react-native相关引用和权限"><span class="nav-number">1.1.</span> <span class="nav-text">导入react-native相关引用和权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写好基础的Android原生和js代码"><span class="nav-number">1.2.</span> <span class="nav-text">写好基础的Android原生和js代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android原生模块和js部分拆分开发"><span class="nav-number">1.3.</span> <span class="nav-text">Android原生模块和js部分拆分开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何调试"><span class="nav-number">2.</span> <span class="nav-text">如何调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发过程中踩的那些坑"><span class="nav-number">3.</span> <span class="nav-text">开发过程中踩的那些坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Android打包过程中踩过的那些坑"><span class="nav-number">4.</span> <span class="nav-text">在Android打包过程中踩过的那些坑</span></a></li></ol></div></div></div><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2019</span> <span class="with-love" id="animate"><i class="fa fa-user"></i> </span><span class="author" itemprop="copyrightHolder">RichardCao</span></div><div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div><span class="post-meta-divider">|</span><div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="post-meta-item-icon"><i class="fa fa-user"></i> </span><span class="site-uv" title="总访客量"><span class="busuanzi-value" id="busuanzi_value_site_uv"></span> </span><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="site-pv" title="总访问量"><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer></div><script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script><script src="/lib/jquery/index.js?v=2.1.3"></script><script src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script src="/js/src/utils.js?v=7.0.1"></script><script src="/js/src/motion.js?v=7.0.1"></script><script src="/js/src/affix.js?v=7.0.1"></script><script src="/js/src/schemes/pisces.js?v=7.0.1"></script><script src="/js/src/scrollspy.js?v=7.0.1"></script><script src="/js/src/post-details.js?v=7.0.1"></script><script src="/js/src/bootstrap.js?v=7.0.1"></script><script id="dsq-count-scr" src="https://http-richardcao-me.disqus.com/count.js" async></script><script>var disqus_config=function(){this.page.url="https://richardcao.me/2015/11/24/React-native-Android-初次踩坑之旅/",this.page.identifier="2015/11/24/React-native-Android-初次踩坑之旅/",this.page.title="React-Native Android 初次踩坑之旅"};function loadComments(){var t=document,e=t.createElement("script");e.src="https://http-richardcao-me.disqus.com/embed.js",e.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(e)}loadComments()</script><script>// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><script>function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'XDBxSGuHuREHL3P5xSrzSBTB-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'XDBxSGuHuREHL3P5xSrzSBTB-gzGzoHsz',
+                'X-LC-Key': 'juXWzSS5WF9zbzahviwc1yVG',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });</script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="/lib/needsharebutton/needsharebutton.js"></script><script>pbOptions={iconStyle:"default",boxForm:"horizontal",position:"bottomCenter",networks:"Wechat,Weibo,QQZone,Twitter"},new needShareButton("#needsharebutton-postbottom",pbOptions)</script><script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script><script>pangu.spacingPage()</script><style>.copy-btn{display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;line-height:20px;color:#333;white-space:nowrap;vertical-align:middle;cursor:pointer;background-color:#eee;background-image:linear-gradient(#fcfcfc,#eee);border:1px solid #d5d5d5;border-radius:3px;user-select:none;outline:0}.highlight-wrap .copy-btn{transition:opacity .3s ease-in-out;opacity:0;padding:2px 6px;position:absolute;right:4px;top:8px}.highlight-wrap .copy-btn:focus,.highlight-wrap:hover .copy-btn{opacity:1}.highlight-wrap{position:relative}</style><script>$(".highlight").each(function(t,e){var n=$("<div>").addClass("highlight-wrap");$(e).after(n),n.append($("<button>").addClass("copy-btn").append("复制").on("click",function(t){var e=$(this).parent().find(".code").find(".line").map(function(t,e){return $(e).text()}).toArray().join("\n"),n=document.createElement("textarea"),o=window.pageYOffset||document.documentElement.scrollTop;n.style.top=o+"px",n.style.position="absolute",n.style.opacity="0",n.readOnly=!0,n.value=e,document.body.appendChild(n),n.select(),n.setSelectionRange(0,e.length),n.readOnly=!1,document.execCommand("copy")?$(this).text("复制成功"):$(this).text("复制失败"),n.blur(),$(this).blur()})).on("mouseleave",function(t){var e=$(this).find(".copy-btn");setTimeout(function(){e.text("复制")},300)}).append(e)})</script></body></html>

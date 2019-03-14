@@ -1,0 +1,375 @@
+<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#2196f3"><link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css"><link rel="stylesheet" href="/lib/Han/dist/han.min.css?v=3.3"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"><link rel="stylesheet" href="/css/main.css?v=7.0.1"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=7.0.1"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-medium.png?v=7.0.1"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-small.png?v=7.0.1"><link rel="mask-icon" href="/images/safari-pinned-tab.svg?v=7.0.1" color="#2196f3"><link rel="manifest" href="/manifest.json"><script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"7.0.1",sidebar:{position:"left",display:"post",offset:12,b2t:!0,scrollpercent:!0,onmobile:!1,dimmer:!1},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><meta name="description" content="戳我关注reading不知不觉reading项目已经有500+star了，作为自己的处女作，感到非常开心。感谢关注reading的人，我会坚持继续维护下去。No Profit, No Advertisement, Only Feelingsreading初衷其实做reading项目的初衷很简单，就是我想自己尝试着用react-native写一个app。真正开始写的时候，大概是五、六个月前的样子，想"><meta name="keywords" content="react-native"><meta property="og:type" content="article"><meta property="og:title" content="聊聊我的处女作：reading"><meta property="og:url" content="https://richardcao.me/2016/07/05/Talk-About-Reading/index.html"><meta property="og:site_name" content="Lifecycle"><meta property="og:description" content="戳我关注reading不知不觉reading项目已经有500+star了，作为自己的处女作，感到非常开心。感谢关注reading的人，我会坚持继续维护下去。No Profit, No Advertisement, Only Feelingsreading初衷其实做reading项目的初衷很简单，就是我想自己尝试着用react-native写一个app。真正开始写的时候，大概是五、六个月前的样子，想"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://img.shields.io/github/stars/attentiveness/reading.svg"><meta property="og:updated_time" content="2019-03-14T07:05:40.285Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="聊聊我的处女作：reading"><meta name="twitter:description" content="戳我关注reading不知不觉reading项目已经有500+star了，作为自己的处女作，感到非常开心。感谢关注reading的人，我会坚持继续维护下去。No Profit, No Advertisement, Only Feelingsreading初衷其实做reading项目的初衷很简单，就是我想自己尝试着用react-native写一个app。真正开始写的时候，大概是五、六个月前的样子，想"><meta name="twitter:image" content="https://img.shields.io/github/stars/attentiveness/reading.svg"><link rel="alternate" href="/atom.xml" title="Lifecycle" type="application/atom+xml"><link rel="canonical" href="https://richardcao.me/2016/07/05/Talk-About-Reading/"><script id="page.configurations">CONFIG.page={sidebar:""}</script><title>聊聊我的处女作：reading | Lifecycle</title><script>var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?81bfa0d04c3d95fc8164207e06fbc43d";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Lifecycle</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description">真正的梦就是现实的彼岸。</h1></div><div class="site-nav-toggle"><button aria-label="切换导航栏"><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://richardcao.me/2016/07/05/Talk-About-Reading/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="RichardCao"><meta itemprop="description" content="不积小流，无以成江海。"><meta itemprop="image" content="/images/avatar.gif"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Lifecycle"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">聊聊我的处女作：reading</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2016-07-05 00:36:54" itemprop="dateCreated datePublished" datetime="2016-07-05T00:36:54+00:00">2016-07-05</time> <span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i> </span><span class="post-meta-item-text">更新于</span> <time title="修改时间：2019-03-14 07:05:40" itemprop="dateModified" datetime="2019-03-14T07:05:40+00:00">2019-03-14</time> </span><span class="post-category"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/open-source/" itemprop="url" rel="index"><span itemprop="name">open source</span></a></span> </span><span class="post-comments-count"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-comment-o"></i> </span><span class="post-meta-item-text">评论数：</span> <a href="/2016/07/05/Talk-About-Reading/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/05/Talk-About-Reading/" itemprop="commentCount"></span> </a></span><span id="/2016/07/05/Talk-About-Reading/" class="leancloud_visitors" data-flag-title="聊聊我的处女作：reading"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="post-meta-item-text">阅读次数：</span> <span class="leancloud-visitors-count"></span></span></div></header><div class="post-body han-init-context" itemprop="articleBody"><p><strong><a href="https://github.com/attentiveness/reading" target="_blank" rel="noopener">戳我关注reading</a></strong></p><p><a href="https://github.com/attentiveness/reading/stargazers" target="_blank" rel="noopener"><img src="https://img.shields.io/github/stars/attentiveness/reading.svg" alt="GitHub stars"></a></p><blockquote><ul><li>不知不觉reading项目已经有500+star了，作为自己的处女作，感到非常开心。感谢关注reading的人，我会坚持继续维护下去。</li><li>No Profit, No Advertisement, Only Feelings</li></ul></blockquote><hr><h2 id="reading初衷"><a href="#reading初衷" class="headerlink" title="reading初衷"></a>reading初衷</h2><p>其实做reading项目的初衷很简单，就是我想自己尝试着用react-native写一个app。真正开始写的时候，大概是五、六个月前的样子，想把自己在实战中的一些经验用代码的方式展现出来，抛砖引玉，和大家一起交流进步。那时候github上国内的react-native开源app还很少，而且大多都没继续维护了，于是自己下决心好好做一个，好好维护下去。不知不觉半年了，每次打开reading项目代码，还是感到一阵亲切。开源reading，可以让reading成长的更快更好，同时对我而言也是一样。对待自己的处女作开源项目，我格外认真，目标是把reading打造成一个高质量的开源项目。</p><h2 id="reading架构演进"><a href="#reading架构演进" class="headerlink" title="reading架构演进"></a>reading架构演进</h2><p>再小的APP也有自己的架构，reading也不例外。在项目的readme中，我简单的提到了<a href="https://github.com/attentiveness/reading#application-architecture" target="_blank" rel="noopener">reading的架构</a>，这里我分享下reading从一开始到现在发生了哪些变化。</p><blockquote><p>reading是基于react-native开发的Android &amp; iOS双平台的APP，数据流和状态通过redux进行管理，并且在摸索着进行UT。</p></blockquote><p>reading现在的架构是这样的：</p><blockquote><ul><li>actions：redux中action部分都在这里</li><li>components：reading中用到的通用控件，全部抽离出来在这里，同时任何一个react-native app，都可以直接拿去用，支持Android &amp; iOS双平台</li><li>constants：这里主要是一些常量，比如action的type，一些字符常量，url常量，还可以有颜色常量等各种</li><li>containers：容器层，需要注入state的地方，我会用容器包一层。如果有需要页面中用到多个组件拼成，也通过容器包一层，达到复用。app入口也在这里</li><li>img：这里主要放图片资源</li><li>pages：这里主要放页面，其实就是组件。目前来看，这里面的组件其实都是reading的单个页面。其实页面是可以组合的，在外面包一层容器的话，就可以进行组合。一些复杂的页面，完全可以通过这种方式去做，复用性更高，而且还能解耦</li><li>reducers：redux中reducer部分都在这里，reducer和action不一定是一一对应的，数量也不一定是相等的。state可以进行各种颗粒度的细分，最后通过<code>combine</code>函数合为一个。拆分state非常重要，它涉及到性能优化，不同的state通过不同的reducer进行处理，然后渲染不同的页面，甚至是渲染同一个页面中的不同组件，这样就避免了过渡渲染。如果不拆分，当一个大state改变的时候，所有的页面都会重新render，这是很浪费性能的</li><li>store：redux的store部分，通过reducer和各种各样的middleware创建store。例如redux-thunk，redux-logger等</li><li>utils：工具包</li><li>root.js：统一index.android.js和index.ios.js入口，通过react-redux中的<code>Provider</code>组件包裹整个APP</li></ul></blockquote><p>以上均为reading的js部分。目前reading中除了引用的第三方库含有原生代码，我几乎没写什么原生代码，我想尝试用js的方式去写。不排除如果后面功能复杂的话，会加一些原生（暂时并不会写OC……）。reading项目是我主打以rn为主原生为辅的开发方式构建跨平台的开源APP。</p><h3 id="起初"><a href="#起初" class="headerlink" title="起初"></a>起初</h3><p>一开始，reading是没有这些东西的，所有代码都是一坨……完全没有模块划分的东西。当时我还在饿了么尝试在蜂鸟众包app中加入react-native模块，也没有任何架构，完全不具备可扩展性。第一次重构发生在我想要加功能的时候，根本没法加，于是我本能的感觉代码是有问题的。当时react-native资料除了官方文档其他的少之又少，中文资料根本没有，于是我找到了一个老外写的app，感觉很6，clone了代码下来读。读完了之后，照猫画虎的重构了一下，有了简单的分层，这就是reading架构的雏形。在这个时候，我才明白redux是个什么东西，怎么用，分层是什么样的。</p><h3 id="第一次里程碑"><a href="#第一次里程碑" class="headerlink" title="第一次里程碑"></a>第一次里程碑</h3><p>由于根本没法加功能，于是我进行了第一次重构。我的记忆中，经历过第一次重构，reading的代码从一坨变成了这样：</p><blockquote><ul><li>actions：redux中action部分都在这里</li><li>components：reading中用到的通用控件，并且在当时所有的页面也在这里，并不支持ios平台</li><li>constants：这里主要是一些常量，当时只有action的type</li><li>containers：容器层，app入口也在这里，当时我所有的页面都会有一个容器，存在资源浪费和过渡渲染的问题</li><li>img：这里主要放图片资源</li><li>reducers：redux中reducer部分都在这里，当时我误认为reducer和action必须一一对应，于是我按照一一对应去写的，这样的思路是有问题的</li><li>store：redux的store部分，通过reducer和各种各样的middleware创建store。当时还不太清楚异步action和同步action的问题，所以redux-thunk都没用上，更别提redux-logger了</li><li>utils：工具包</li><li>root.js：统一index.android.js和index.ios.js入口，通过react-redux中的<code>Provider</code>组件包裹整个APP</li></ul></blockquote><p>可以看出，这就是reading现有架构的雏形。它已经初步规定了数据流向，规定了系统分层与组件间的关系等。在这个架构的基础上，我添加了reading最初也是最基础的几个功能。</p><h3 id="再一次改变"><a href="#再一次改变" class="headerlink" title="再一次改变"></a>再一次改变</h3><p>写着写着，也发了几个版本，感觉性能有点问题，也看了更多的一些代码，跟着官方更新的脚步思考，又看了一些文章，反反复复，我觉得我的代码存在一些问题，需要进一步修改。当时我意识到的问题有：</p><blockquote><ul><li>redux使用存在过度渲染问题，数据流管理有点乱，需要重点优化</li><li>组件和页面的概念有点模糊，需要进一步界定</li><li>action和reducer的概念有点模糊，需要更清晰的理解</li><li>组件化思想愈发明确，action中需要异步与同步共同处理</li></ul></blockquote><p>首先，关于redux的问题，其实是一连串的问题，也是我之前没有搞清楚的概念。我一直认为action和reducer是一一对应的，其实完全不是的，更形象的说，是多对多的。redux的state最后会合并成一个，所以为了避免每次改变state都刷新所有的页面，应该拆分state，局部刷新，这样可以避免过度渲染。只要我们根据实际情况，把reducer拆开，action可以根据一个页面定义一个，然后一个页面完全可以对应多个reducer去操作，这样不光解决了性能问题，数据流管理也更加清晰了。其实这里涉及到2个框架：<code>redux</code>和<code>react-redux</code>，拆分了之后需要用react-redux的<code>connect</code>函数按需注入<code>dispatch</code>和<code>state</code>，这时候拆分的reducer就起作用啦，模块中containers部分也得到了优化，从一个页面对应一个容器，优化到需要注入的页面才有容器，不需要的就不要容器。概念区分清楚了，定义就完全自由了。<br>其次，关于组件和页面的问题，我干脆加了一个pages包，专门放页面，相当于页面级的组件，和业务相关，components里只放通用模块组件，保证我拿到别的项目分分钟一样可以用起来，这样一拆分，瞬间清爽多了。<br>组件化思想驱使我在action中处理同步+异步的问题，之前的代码中，网络请求等明显的异步action是放在页面组件中的，现在全部抽走拿到action中，也就是说V这一层被解耦了，只和action、reducer相关，这个action我感觉有点像Android MVP架构中的P层。</p><h3 id="Android-amp-iOS统一"><a href="#Android-amp-iOS统一" class="headerlink" title="Android &amp; iOS统一"></a>Android &amp; iOS统一</h3><p>架构暂时稳定了一段时间，我考虑兼容iOS。因为我起初是只做了android平台，所以在兼容ios的时候，主要还是在UI的部分，其实并不难，在做android的时候，我就考虑到了后续兼容ios的问题，组件方法函数等都考虑到了ios，这部分我做的最多的还是UI层的统一。在代码改动最少的情况下兼容ios，而且reading的业务逻辑并不复杂，于是很容易就做到啦。</p><p>reading发展到现在，大致上经历了这四个过程，后面还有很长的路要走，要学习的东西还有很多。</p><h2 id="reading未来发展"><a href="#reading未来发展" class="headerlink" title="reading未来发展"></a>reading未来发展</h2><p>下一步，reading会基于Android &amp; iOS双平台的基础上，继续做一些事情，在这里我简单列举一下：</p><blockquote><ul><li>redux还有很多更高级的玩法，还需要再琢磨琢磨<a href="http://redux.js.org/" target="_blank" rel="noopener">redux的官方文档和react-redux的API文档</a>，翻译的很棒的中文版<a href="http://cn.redux.js.org/" target="_blank" rel="noopener">在这里</a></li><li>逻辑+UI的测试框架我已经跑通，如何编写有价值的测试用例也是我需要学习的</li><li>目前reading项目中Navigator机制用的是官方提供的<a href="http://facebook.github.io/react-native/docs/navigator.html" target="_blank" rel="noopener">Navigator</a>实现双平台的统一，但是关注react-native动态的小伙伴都知道，官方正在做一款新的Navigator机制：<code>NavigationExperimental</code>。最近的版本release note里关于这个的内容很多，暂时还不稳定，所以我还没去看，官方在issue里表示过，新的Navigator很快就会release，到时候我会在reading中进行切换</li><li>我会时刻关注react-native动态，会在reading的代码中体现出来</li></ul></blockquote><h2 id="最后说几句"><a href="#最后说几句" class="headerlink" title="最后说几句"></a>最后说几句</h2><p>reading还有很长的路要走，我的目标是把它打造成<strong>国内优质的react-native APP开源项目</strong>，让想学习rn快速搭建APP的人通过学习reading的代码，系统性的搭建起属于自己的APP，并且进行各种各样的架构优化与演进，用于开源项目或者商业项目，体现价值。欢迎大家与我交流，提issue，pr给我。</p><h2 id="特别感谢"><a href="#特别感谢" class="headerlink" title="特别感谢"></a>特别感谢</h2><p>感谢<a href="https://github.com/luics" target="_blank" rel="noopener">鬼道</a>大哥star了reading项目，鼓励我让我继续加油。刚开始接触react-native的时候，什么都不会，很多问题都是请教了鬼道大哥才明白，经常交流，受益匪浅。同时，热烈庆祝<a href="https://github.com/alibaba/weex" target="_blank" rel="noopener">weex</a>开源，阿里巴巴对技术的执着追求让我敬仰，对开源社区的贡献让我钦佩。虽然我现在还非常弱小，但我也非常愿意在开源社区贡献自己的力量，伴随我的成长，相信这股力量会越来越强大。</p></div><div><div id="wechat_subscriber" style="display:block;padding:10px 0;margin:20px auto;width:100%;text-align:center"><img id="wechat_subscriber_qcode" src="/images/My_Official_Accounts.jpg" alt="RichardCao wechat" style="width:200px;max-width:100%"><div>欢迎关注我的个人微信公众号，不定期推送精彩内容~</div></div></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div><button id="rewardButton" disable="enable" onclick="var qr = document.getElementById(&quot;QR&quot;); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}"><span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"><img id="wechat_qr" src="/images/wechatpay.jpg" alt="RichardCao 微信支付"><p>微信支付</p></div></div></div></div><footer class="post-footer"><div class="post-tags"><a href="/tags/react-native/" rel="tag"># react-native</a></div><div class="post-widgets"><div class="social_share"><div id="needsharebutton-postbottom"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div></div></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2016/05/29/Retrofit2源码分析（一）/" rel="next" title="Retrofit2源码分析（一）"><i class="fa fa-chevron-left"></i> Retrofit2源码分析（一）</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/2016/09/07/React-Native-With-Redux-Refactor/" rel="prev" title="再谈React-Native With Redux">再谈React-Native With Redux <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article></div></div><div class="comments" id="comments"><div id="disqus_thread"><noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><div class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><p class="site-author-name" itemprop="name">RichardCao</p><p class="site-description motion-element" itemprop="description">不积小流，无以成江海。</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">21</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/index.html"><span class="site-state-item-count">7</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">11</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"><span class="links-of-author-item"><a href="https://github.com/Richard-Cao" title="GitHub &rarr; https://github.com/Richard-Cao" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:caolicheng921104@gmail.com" title="E-Mail &rarr; mailto:caolicheng921104@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a></span></div></div></div><div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#reading初衷"><span class="nav-number">1.</span> <span class="nav-text">reading初衷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reading架构演进"><span class="nav-number">2.</span> <span class="nav-text">reading架构演进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#起初"><span class="nav-number">2.1.</span> <span class="nav-text">起初</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一次里程碑"><span class="nav-number">2.2.</span> <span class="nav-text">第一次里程碑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再一次改变"><span class="nav-number">2.3.</span> <span class="nav-text">再一次改变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-amp-iOS统一"><span class="nav-number">2.4.</span> <span class="nav-text">Android &amp; iOS统一</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reading未来发展"><span class="nav-number">3.</span> <span class="nav-text">reading未来发展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后说几句"><span class="nav-number">4.</span> <span class="nav-text">最后说几句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特别感谢"><span class="nav-number">5.</span> <span class="nav-text">特别感谢</span></a></li></ol></div></div></div><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2019</span> <span class="with-love" id="animate"><i class="fa fa-user"></i> </span><span class="author" itemprop="copyrightHolder">RichardCao</span></div><div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div><span class="post-meta-divider">|</span><div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.0.1</div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="post-meta-item-icon"><i class="fa fa-user"></i> </span><span class="site-uv" title="总访客量"><span class="busuanzi-value" id="busuanzi_value_site_uv"></span> </span><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-eye"></i> </span><span class="site-pv" title="总访问量"><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer></div><script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script><script src="/lib/jquery/index.js?v=2.1.3"></script><script src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script src="/js/src/utils.js?v=7.0.1"></script><script src="/js/src/motion.js?v=7.0.1"></script><script src="/js/src/affix.js?v=7.0.1"></script><script src="/js/src/schemes/pisces.js?v=7.0.1"></script><script src="/js/src/scrollspy.js?v=7.0.1"></script><script src="/js/src/post-details.js?v=7.0.1"></script><script src="/js/src/bootstrap.js?v=7.0.1"></script><script id="dsq-count-scr" src="https://http-richardcao-me.disqus.com/count.js" async></script><script>var disqus_config=function(){this.page.url="https://richardcao.me/2016/07/05/Talk-About-Reading/",this.page.identifier="2016/07/05/Talk-About-Reading/",this.page.title="聊聊我的处女作：reading"};function loadComments(){var t=document,e=t.createElement("script");e.src="https://http-richardcao-me.disqus.com/embed.js",e.setAttribute("data-timestamp",""+ +new Date),(t.head||t.body).appendChild(e)}loadComments()</script><script>// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('-1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script><script>function addCount(Counter) {
+      var $visitors = $('.leancloud_visitors');
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
+            
+              .done(function() {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.time + 1);
+              })
+            
+              .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+              })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
+                .done(function() {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function() {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+        .fail(function ({ responseJSON }) {
+          console.log('LeanCloud Counter Error: ' + responseJSON.code + ' ' + responseJSON.error);
+        });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + 'XDBxSGuHuREHL3P5xSrzSBTB-gzGzoHsz')
+        .done(function({ api_server }) {
+          var Counter = function(method, url, data) {
+            return $.ajax({
+              method: method,
+              url: 'https://' + api_server + '/1.1' + url,
+              headers: {
+                'X-LC-Id': 'XDBxSGuHuREHL3P5xSrzSBTB-gzGzoHsz',
+                'X-LC-Key': 'juXWzSS5WF9zbzahviwc1yVG',
+                'Content-Type': 'application/json',
+              },
+              data: data
+            });
+          };
+          
+            addCount(Counter);
+          
+        });
+    });</script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}()</script><script src="/lib/needsharebutton/needsharebutton.js"></script><script>pbOptions={iconStyle:"default",boxForm:"horizontal",position:"bottomCenter",networks:"Wechat,Weibo,QQZone,Twitter"},new needShareButton("#needsharebutton-postbottom",pbOptions)</script><script src="/lib/pangu/dist/pangu.min.js?v=3.3"></script><script>pangu.spacingPage()</script><style>.copy-btn{display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;line-height:20px;color:#333;white-space:nowrap;vertical-align:middle;cursor:pointer;background-color:#eee;background-image:linear-gradient(#fcfcfc,#eee);border:1px solid #d5d5d5;border-radius:3px;user-select:none;outline:0}.highlight-wrap .copy-btn{transition:opacity .3s ease-in-out;opacity:0;padding:2px 6px;position:absolute;right:4px;top:8px}.highlight-wrap .copy-btn:focus,.highlight-wrap:hover .copy-btn{opacity:1}.highlight-wrap{position:relative}</style><script>$(".highlight").each(function(t,e){var n=$("<div>").addClass("highlight-wrap");$(e).after(n),n.append($("<button>").addClass("copy-btn").append("复制").on("click",function(t){var e=$(this).parent().find(".code").find(".line").map(function(t,e){return $(e).text()}).toArray().join("\n"),n=document.createElement("textarea"),o=window.pageYOffset||document.documentElement.scrollTop;n.style.top=o+"px",n.style.position="absolute",n.style.opacity="0",n.readOnly=!0,n.value=e,document.body.appendChild(n),n.select(),n.setSelectionRange(0,e.length),n.readOnly=!1,document.execCommand("copy")?$(this).text("复制成功"):$(this).text("复制失败"),n.blur(),$(this).blur()})).on("mouseleave",function(t){var e=$(this).find(".copy-btn");setTimeout(function(){e.text("复制")},300)}).append(e)})</script></body></html>
