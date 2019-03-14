@@ -1,7 +1,7 @@
 title: 记一次Android本地拒绝服务漏洞的追根溯源
 date: 2018-08-03 15:28:30
 categories: 踩坑总结
-tags: Java
+tags: Android
 ---
 
 ## 背景
